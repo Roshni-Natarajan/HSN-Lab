@@ -1,0 +1,87 @@
+Introduction
+This experiment is designed to compare the performance of TCP variants, cubic and reno, with delay and under attack.
+For each TCP variant, we have four cases:
+Case 1: no delay and no attack
+Case 2: attack but no delay
+Case 3: delay but no attack
+Case 4: delay and attack
+As we compare two different TCP variants, we have 8 experimental units in total. And we do each unit 3 trials for accuracy.
+
+Setup
+Use GENI Portal to get virtual machines from InstaGENI:
+1. Reserve the resources for this experiment:
+   If you have a GENI account, you can reserve a 4-router topology by public RSpec (OSPF 4-node) at your assigned InstaGENI aggregate.
+   The topology is shown at http://postimg.org/image/vqn4wmupn/.
+2. Log onto the reserved nodes by using your SSH keys.
+
+Execute
+Now that we have reserved the nodes. Let's log on to each nodes and do experiment. 
+
+Case 1:
+TCP Variant
+To activate a particular TCP variant, run
+    modprobe tcp_VARIANT
+then
+    sysctl -w net.ipv4.tcp_congestion_control=VARIANT
+where VARINAT is the TCP you are trying to enable, here we use cubic or reno. The original TCP is cubic in the built 
+Note that reno does not require the modprobe command. You can enable reno with just the sysctl command.
+To verify which TCP variant is currently enabled, run
+    sysctl net.ipv4.tcp_congestion_control
+
+Throughtput using iperf
+From the previous experiment, you should already know how to install iperf on your resources.
+For this experiment, you can store the output of each trial in a data file. If you run the iperf client as follows:
+    iperf -c 192.168.20.10 --reportstyle C  -i 1 | tee OUTPUT.txt
+where OUTPUT.txt is the name of an output file you'd like to create, we name the first trail of cubic with no delay and no attack as cubic_nd_na_1.txt and the second trial of reno with delay but no attack as reno_d_na_2.txt.
+And the values in each line of the file are shown in lab2.
+
+Case 2:
+By following the case 1 above, you can log onto the router on the client-server path to make the attack.
+First, you need to run ping from client (192.168.10.11) to server (192.168.20.10). And then run traceroute from client to server.
+    traceroute to 192.168.20.10 (192.168.20.10), 30 hops max, 60 byte packets
+    1  router-1-lan4 (192.168.10.10)  0.536 ms  0.596 ms  0.562 ms
+    2  router-2-lan0 (192.168.1.2)  1.048 ms  0.994 ms  0.979 ms
+    3  router-3-lan1 (192.168.2.2)  1.368 ms  1.328 ms  1.291 ms
+    4  server-lan5 (192.168.20.10)  1.878 ms  1.790 ms  1.706 ms
+In this way, you can see the path client-router1-router2-router3-server.
+
+Second, we log onto the router-2 and try to attack. We can make the link between router-1 and router-2 fail by bringing down the corresponding interface on router-2.
+By using ifconfig to get the information of all interfaces, and then while we are running the iperf client processing, bring down (up) the interface:
+    sudo ifconfig eth3 down (up)
+The appropriate interface is eth3 in the router-2 (eth1 in the router-4). You can see loss of packet in the iperf results.
+
+Case 3:
+Link latency
+To emulate latency on a link, we'll use a tool called netem.
+To try it out, you'll run a command on the resource using the following syntax
+    tc qdisc add dev IFNAME root netem delay DELAYms JITTERms
+where IFNAME is the name of the data interface.
+In this case, you would log onto the client and server, then run
+    sudo tc qdisc add dev eth1 root netem delay 100ms 10ms
+You can pick up any value as the average latency.
+To remove the emulated latency on an interface, run
+    tc qdisc del dev IFNAME root
+Make sure you change this parameter both at the client and server, then you can use ping to verify that you see the expected latency on the link.
+And then you can follow up what you did previously in case 1.
+
+Case 4:
+Combining what we show in case 2 and case 3, just make sure you bring down the router while you are running the iperf client.
+In all 4 cases, you can get the resulting files like what we shown in the Data.
+
+Finish
+Remember to delete your reserved resources in GENI when you finish all steps.
+
+Throughput Analysis
+                                     cubic                                                                 reno
+-----------------------------------------------------------------------------------------------------------------------------------------------
+               1        |        2       |        3       |      Avg.      |         1        |        2       |       3        |      Avg.
+---------------------------------------------------------------------------------------------------------------------------------------------
+Case 1 | 99.7 Mbits/sec | 99.8 Mbits/sec | 99.6 Mbits/sec | 99.7 Mbits/sec |   98.2 Mbits/sec | 98.5 Mbits/sec | 98.6 Mbits/sec | 98.4 Mbits/sec
+----------------------------------------------------------------------------------------------------------------------------------------------
+Case 2 | 81.3 Mbits/sec | 67.0 Mbits/sec | 82.4 Mbits/sec | 82.4 Mbits/sec |   83.8 Mbits/sec | 83.9 Mbits/sec | 84.2 Mbits/sec | 84.0 Mbits/sec
+----------------------------------------------------------------------------------------------------------------------------------------------
+Case 3 | 3.55 Mbits/sec | 2.95 Mbits/sec | 3.62 Mbits/sec | 3.37 Mbits/sec |   1.65 Mbits/sec | 1.62 Mbits/sec | 1.55 Mbits/sec | 1.61 Mbits/sec
+----------------------------------------------------------------------------------------------------------------------------------------------
+Case 4 | 802 Kbits/sec  | 1.04 Mbits/sec | 625 Kbits/sec  | 822 Kbits/sec  |   775 Kbits/sec  | 604 Kbits/sec  | 415 Kbits/sec  | 598 Kbits/sec
+
+cubic have better performance with delay than reno, and work closely to reno with attack.

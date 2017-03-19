@@ -1,0 +1,14 @@
+PING 192.168.20.10 (192.168.20.10) 56(84) bytes of data.
+64 bytes from 192.168.20.10: icmp_req=1 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=2 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=3 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=4 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=6 ttl=61 time=803 ms
+64 bytes from 192.168.20.10: icmp_req=7 ttl=61 time=803 ms
+64 bytes from 192.168.20.10: icmp_req=8 ttl=61 time=803 ms
+64 bytes from 192.168.20.10: icmp_req=9 ttl=61 time=803 ms
+64 bytes from 192.168.20.10: icmp_req=10 ttl=61 time=805 ms
+
+--- 192.168.20.10 ping statistics ---
+10 packets transmitted, 9 received, 10% packet loss, time 9009ms
+rtt min/avg/max/mdev = 703.531/759.389/805.146/49.911 ms

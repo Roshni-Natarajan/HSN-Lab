@@ -1,0 +1,12 @@
+root@server:/users/prateekv# iperf -s -u
+------------------------------------------------------------
+Server listening on UDP port 5001
+Receiving 1470 byte datagrams
+UDP buffer size:  224 KByte (default)
+------------------------------------------------------------
+[  3] local 192.168.20.11 port 5001 connected with 192.168.10.11 port 48122
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0- 9.4 sec  1.18 MBytes  1.05 Mbits/sec  11.081 ms   50/  893 (5.6%)
+[  3]  0.0- 9.4 sec  166 datagrams received out-of-order
+read failed: Connection refused
+

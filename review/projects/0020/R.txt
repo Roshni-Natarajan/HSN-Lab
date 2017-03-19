@@ -1,0 +1,174 @@
+dat <- read.csv("cubic-stability-project/data/CUBIC-20-flow3")
+str(dat)
+cnames <- c("time", "srcip", "srcport", "dstip", 
+            "dstport", "id", "interval", "data", 
+            "tput")
+names(dat) <- cnames
+dat$tcp <- "cubic"
+dat$capacity <- 25
+dat$rtt <- 220
+dat$trial <- 1
+str(dat)
+
+num1<- 0
+num2<- 0
+num3<- 0
+for (i in 1:nrow(dat)) {
+  if(num1!=0){
+    if(num2!=0){
+      if(num3!=0){
+        break
+      }
+      else{
+        if(dat[i,3]!=num1 && dat[i,3]!=num2){
+          num3<- dat[i,3]
+        }  			
+      }
+    }
+    else{
+      if(dat[i,3]!=num1){
+        num2<- dat[i,3]
+      }			
+    }
+  }
+  else{
+    num1<- dat[i,3]
+  }
+}
+
+for (j in 1:nrow(dat)) {
+  
+  i <- nrow(dat)-j
+  if(i>0){
+    
+    
+    if(dat[i,3]==num1){
+      dat[i,13]<- 1
+    }
+    else{
+      if(dat[i,3]==num2){
+        dat[i,13] <- 2}
+      else{
+        if(dat[i,3]==num3){
+          dat[i,13]<- 3}
+        else{
+          dat=dat[-i,]}
+      }
+    }
+  }
+}
+dat$trial <- as.factor(dat$trial)
+dat$tcp <- as.factor(dat$tcp)
+
+library(reshape2)
+dat <- transform(dat, interval = colsplit(interval,"-", names = c('begin', 'end')))
+dat$interval.begin <- dat$interval$begin
+dat$interval.end <- dat$interval$end
+dat$interval <- NULL
+totals  <- dat[dat$interval.begin<=1 & dat$interval.end>=500,]
+details <- dat[!(dat$interval.begin<=1 & dat$interval.end>=500),]
+details <- details[!(details$interval.begin<=5),]
+library(ggplot2)
+q <- ggplot(details)
+q <- q + geom_line(aes(x=interval.begin, y=data, colour=trial, linetype=trial))
+q
+dat <- read.csv("cubic-stability-project/data/CUBIC-20-flow3")
+str(dat)
+cnames <- c("time", "srcip", "srcport", "dstip", 
+            "dstport", "id", "interval", "data", 
+            "tput")
+names(dat) <- cnames
+dat$tcp <- "cubic"
+dat$capacity <- 25
+dat$rtt <- 220
+dat$trial <- 1
+str(dat)
+
+num1<- 0
+num2<- 0
+num3<- 0
+for (i in 1:nrow(dat)) {
+  if(num1!=0){
+    if(num2!=0){
+      if(num3!=0){
+        break
+      }
+      else{
+        if(dat[i,3]!=num1 && dat[i,3]!=num2){
+          num3<- dat[i,3]
+        }  			
+      }
+    }
+    else{
+      if(dat[i,3]!=num1){
+        num2<- dat[i,3]
+      }			
+    }
+  }
+  else{
+    num1<- dat[i,3]
+  }
+}
+
+for (j in 1:nrow(dat)) {
+  
+  i <- nrow(dat)-j
+  if(i>0){
+    
+    
+    if(dat[i,3]==num1){
+      dat[i,13]<- 1
+    }
+    else{
+      if(dat[i,3]==num2){
+        dat[i,13] <- 2}
+      else{
+        if(dat[i,3]==num3){
+          dat[i,13]<- 3}
+        else{
+          dat=dat[-i,]}
+      }
+    }
+  }
+}
+dat$trial <- as.factor(dat$trial)
+dat$tcp <- as.factor(dat$tcp)
+
+library(reshape2)
+dat <- transform(dat, interval = colsplit(interval,"-", names = c('begin', 'end')))
+dat$interval.begin <- dat$interval$begin
+dat$interval.end <- dat$interval$end
+dat$interval <- NULL
+totals  <- dat[dat$interval.begin<=1 & dat$interval.end>=500,]
+details <- dat[!(dat$interval.begin<=1 & dat$interval.end>=500),]
+details <- details[!(details$interval.begin<=5),]
+library(ggplot2)
+q <- ggplot(details)
+q <- q + geom_line(aes(x=interval.begin, y=data, colour=trial, linetype=trial))
+q
+
+
+cov1 <- sd(detail$data)/mean(detail$data)
+data <- details[details$interval.begin%%5==0,]
+cov5 <- sd(data$data)/mean(data$data)
+data <- details[details$interval.begin%%10==0,]
+cov10 <- sd(data$data)/mean(data$data)
+data <- details[details$interval.begin%%20==0,]
+cov20 <- sd(data$data)/mean(data$data)
+data <- details[details$interval.begin%%40==0,]
+cov40 <- sd(data$data)/mean(data$data)
+data <- details[details$interval.begin%%80==0,]
+cov80 <- sd(data$data)/mean(data$data)
+
+value <- c(cov1, cov5, cov10, cov20, cov40, cov80)
+cov <-data.frame(value)
+
+//calculate cov in 5 interval
+data <- details[details$interval.begin%%5==0,]
+data1 <- data[data$trial==1,]
+data2 <- data[data$trial==2,]
+data3 <- data[data$trial==3,]
+cov11 <- sd(data1$data)/mean(data1$data)
+cov12 <- sd(data2$data)/mean(data2$data)
+cov13 <- sd(data3$data)/mean(data3$data)
+cov1 <- (cov11+cov12+cov13)/3

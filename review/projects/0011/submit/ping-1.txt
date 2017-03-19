@@ -1,0 +1,25 @@
+PING 192.168.20.10 (192.168.20.10) 56(84) bytes of data.
+64 bytes from 192.168.20.10: icmp_req=1 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=2 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=3 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=4 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=5 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=6 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=7 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=8 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=9 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=10 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=11 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=12 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=13 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=14 ttl=61 time=704 ms
+64 bytes from 192.168.20.10: icmp_req=15 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=16 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=17 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=18 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=19 ttl=61 time=703 ms
+64 bytes from 192.168.20.10: icmp_req=20 ttl=61 time=703 ms
+
+--- 192.168.20.10 ping statistics ---
+20 packets transmitted, 20 received, 0% packet loss, time 19000ms
+rtt min/avg/max/mdev = 703.228/703.589/704.088/0.783 ms

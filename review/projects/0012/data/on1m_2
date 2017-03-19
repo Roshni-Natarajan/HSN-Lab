@@ -1,0 +1,64 @@
+PING server-link-0 (10.1.1.1) 56(84) bytes of data.
+64 bytes from server-link-0 (10.1.1.1): icmp_req=1 ttl=63 time=35.4 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=2 ttl=63 time=63.0 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=3 ttl=63 time=91.6 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=4 ttl=63 time=120 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=5 ttl=63 time=148 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=6 ttl=63 time=177 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=7 ttl=63 time=205 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=8 ttl=63 time=234 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=9 ttl=63 time=263 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=10 ttl=63 time=292 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=11 ttl=63 time=322 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=12 ttl=63 time=352 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=13 ttl=63 time=385 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=14 ttl=63 time=387 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=15 ttl=63 time=380 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=17 ttl=63 time=380 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=18 ttl=63 time=385 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=20 ttl=63 time=386 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=22 ttl=63 time=386 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=25 ttl=63 time=383 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=26 ttl=63 time=387 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=27 ttl=63 time=378 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=30 ttl=63 time=385 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=32 ttl=63 time=386 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=35 ttl=63 time=383 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=36 ttl=63 time=386 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=45 ttl=63 time=386 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=46 ttl=63 time=389 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=50 ttl=63 time=383 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=51 ttl=63 time=386 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=52 ttl=63 time=390 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=54 ttl=63 time=389 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=55 ttl=63 time=381 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=60 ttl=63 time=388 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=63 ttl=63 time=389 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=65 ttl=63 time=388 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=68 ttl=63 time=384 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=69 ttl=63 time=388 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=70 ttl=63 time=381 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=73 ttl=63 time=387 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=74 ttl=63 time=390 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=75 ttl=63 time=382 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=76 ttl=63 time=386 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=77 ttl=63 time=389 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=80 ttl=63 time=389 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=83 ttl=63 time=390 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=85 ttl=63 time=388 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=88 ttl=63 time=385 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=89 ttl=63 time=388 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=98 ttl=63 time=392 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=99 ttl=63 time=395 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=101 ttl=63 time=395 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=104 ttl=63 time=392 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=106 ttl=63 time=393 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=108 ttl=63 time=394 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=110 ttl=63 time=395 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=112 ttl=63 time=396 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=113 ttl=63 time=387 ms
+64 bytes from server-link-0 (10.1.1.1): icmp_req=118 ttl=63 time=395 ms
+
+--- server-link-0 ping statistics ---
+120 packets transmitted, 59 received, 50% packet loss, time 119277ms
+rtt min/avg/max/mdev = 35.427/348.209/396.368/90.682 ms

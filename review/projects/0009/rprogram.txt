@@ -1,0 +1,126 @@
+t1 <- read.table("submit/ping1-h2-h3-l2.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 1
+> x <- t1
+> t1 <- read.table("submit/ping2-h2-h3-l2.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 2
+> x <- cbind(x,t1)
+> t1 <- read.table("submit/ping3-h2-h3-l2.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 3
+> x <- cbind(x,t1)
+> t1 <- read.table("submit/ping4-h2-h3-l2.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 4
+> x <- cbind(x,t1)
+> x$meanRTT <- (x[,4]+x[,9]+x[,14]+x[,19])/4
+> x$switch <- "l2"
+> x$link <- "h2-h3"
+> y <- x[,c(5,21:23)]
+> dat <- rbind(dat,y)
+> t1 <- read.table("submit/ping1-h2-h3-l3.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 1
+> x <- t1
+> t1 <- read.table("submit/ping2-h2-h3-l3.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 2
+> x <- cbind(x,t1)
+> t1 <- read.table("submit/ping3-h2-h3-l3.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 3
+> x <- cbind(x,t1)
+> t1 <- read.table("submit/ping4-h2-h3-l3.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 4
+> x <- cbind(x,t1)
+> x$meanRTT <- (x[,4]+x[,9]+x[,14]+x[,19])/4
+> x$switch <- "l3"
+> x$switch <- "h2-h3"
+> x$switch <- "l3"
+> x$link <- "h2-h3"
+> y <- x[,c(5,21:23)]
+> dat <- rbind(dat,y)
+> t1 <- read.table("submit/ping1-h3-h1-l2.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 1
+> x <- t1
+> t1 <- read.table("submit/ping2-h3-h1-l2.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 2
+> x <- cbind(x,t1)
+> t1 <- read.table("submit/ping3-h3-h1-l2.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 3
+> x <- cbind(x,t1)
+> t1 <- read.table("submit/ping4-h3-h1-l2.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 4
+> x <- cbind(x,t1)
+> x$meanRTT <- (x[,4]+x[,9]+x[,14]+x[,19])/4
+> x$switch <- "l2"
+> x$link <- "h3-h1"
+> y <- x[,c(5,21:23)]
+> dat <- rbind(dat,y)
+> t1 <- read.table("submit/ping1-h3-h1-l3.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 1
+> x <- t1
+> t1 <- read.table("submit/ping2-h3-h1-l3.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 2
+> x <- cbind(x,t1)
+> t1 <- read.table("submit/ping3-h3-h1-l3.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 3
+> x <- cbind(x,t1)
+> t1 <- read.table("submit/ping4-h3-h1-l3.txt-read.txt",sep="=")
+> names(t1) <- names
+> t1$trial <- 4
+> x <- cbind(x,t1)
+> x$meanRTT <- (x[,4]+x[,9]+x[,14]+x[,19])/4
+> x$switch <- "l3"
+> x$link <- "h3-h1"
+> y <- x[,c(5,21:23)]
+> dat <- rbind(dat,y)
+> dat
+
+>all <- dat
+
+
+
+
+
+> link1 <- all[c(1:40),]
+> link2 <- all[c(41:80),]
+> link3 <- all[c(81:120),]
+
+
+
+
+> q <- ggplot(link2)
+> q <- q + geom_line(aes(x=seq.no, y=meanRTT, colour=switch))
+> q <- q + scale_x_discrete("ICMP Seq no.")
+> q <- q + scale_y_continuous("RTT in ms")
+> q <- q + ggtitle("l2 vs l3 switching in SDN(link2)")
+> q
+> ggsave("l2 vs l3 link2 h2-h3.png", plot=q)
+Saving 7.76 x 5.1 in image
+> ggsave("L2vsL3link2.png", plot=q)
+Saving 7.76 x 5.1 in image
+> q <- ggplot(link1)
+> q <- q + geom_line(aes(x=seq.no, y=meanRTT, colour=switch))
+> q <- q + scale_x_discrete("ICMP Seq no.")
+> q <- q + scale_y_continuous("RTT in ms")
+> q <- q + ggtitle("l2 vs l3 switching in SDN(link1)")
+> q
+> ggsave("L2vsL3link1.png", plot=q)
+Saving 7.76 x 5.1 in image
+> q <- ggplot(link3)
+> q <- q + geom_line(aes(x=seq.no, y=meanRTT, colour=switch))
+> q <- q + scale_x_discrete("ICMP Seq no.")
+> q <- q + scale_y_continuous("RTT in ms")
+> q <- q + ggtitle("l2 vs l3 switching in SDN(link3)")
+> q
+> ggsave("L2vsL3link3.png", plot=q)

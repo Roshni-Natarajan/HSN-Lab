@@ -1,0 +1,11 @@
+02:07:51.697 1   switches: flows/sec:  37743   total = 3.654400 per ms 
+02:08:01.799 1   switches: flows/sec:  19738   total = 1.973458 per ms 
+02:08:11.900 1   switches: flows/sec:  19013   total = 1.901132 per ms 
+02:08:22.519 1   switches: flows/sec:  18236   total = 1.733629 per ms 
+02:08:32.624 1   switches: flows/sec:  18765   total = 1.875743 per ms 
+02:08:42.726 1   switches: flows/sec:  20126   total = 2.012219 per ms 
+02:08:53.705 1   switches: flows/sec:  18588   total = 1.708678 per ms 
+02:09:03.807 1   switches: flows/sec:  18918   total = 1.891388 per ms 
+02:09:14.904 1   switches: flows/sec:  20029   total = 1.821421 per ms 
+02:09:25.007 1   switches: flows/sec:  20044   total = 2.003793 per ms 
+RESULT: 1 switches 9 tests min/max/avg/stdev = 1708.68/2012.22/1880.16/103.46 responses/s

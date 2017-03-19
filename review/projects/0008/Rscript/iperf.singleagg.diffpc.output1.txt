@@ -1,0 +1,28 @@
+dat <- read.csv("el6383-projectkv/SingleAgg/DiffPC/day1/n7n3.txt")
+cnames <- c("time", "srcip", "srcport", "dstip", 
+            "dstport", "id", "interval", "data", 
+            "tput")
+names(dat) <- cnames
+all <- dat
+dat <- read.csv("el6383-projectkv/SingleAgg/DiffPC/day2/n7n3_iperf2.txt")
+names(dat) <- cnames
+all <- rbind(all, dat)
+dat <- read.csv("el6383-projectkv/SingleAgg/DiffPC/day3/n3n7_iperf3.txt")
+names(dat) <- cnames
+all <- rbind(all, dat)
+dat <- read.csv("el6383-projectkv/SingleAgg/DiffPC/day4/n0n3_iperf4.txt")
+names(dat) <- cnames
+all <- rbind(all, dat)
+library(reshape2)
+all <- transform(all, interval = colsplit(interval,"-", names = c('begin', 'end')))
+all$interval.begin <- all$interval$begin
+all$interval.end <- all$interval$end
+all$interval <- NULL
+all$interval.begin
+all$interval.end
+totals  <- all[all$interval.begin<=1 & all$interval.end>=10,]
+details <- all[!(all$interval.begin<=1 & all$interval.end>=10),]
+library(ggplot2)
+q <- ggplot(details)
+q <- q + geom_line(aes(x=interval.begin, y=tput))
+q

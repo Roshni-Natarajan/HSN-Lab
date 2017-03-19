@@ -1,0 +1,11 @@
+00:41:45.230 4   switches: flows/sec:  8098  7296  7297  7296   total = 2.998211 per ms 
+00:41:55.589 4   switches: flows/sec:  4894  4894  4916  4919   total = 1.912786 per ms 
+00:42:05.797 4   switches: flows/sec:  4644  4636  4633  4645   total = 1.835967 per ms 
+00:42:16.083 4   switches: flows/sec:  4645  4645  4625  4646   total = 1.822341 per ms 
+00:42:26.186 4   switches: flows/sec:  4297  4296  4292  4272   total = 1.715226 per ms 
+00:42:36.290 4   switches: flows/sec:  4421  4394  4371  4395   total = 1.757462 per ms 
+00:42:46.394 4   switches: flows/sec:  4594  4620  4597  4596   total = 1.839993 per ms 
+00:42:56.943 4   switches: flows/sec:  4545  4544  4554  4544   total = 1.740560 per ms 
+00:43:07.048 4   switches: flows/sec:  4096  4118  4098  4121   total = 1.642491 per ms 
+00:43:17.245 4   switches: flows/sec:  4418  4421  4445  4444   total = 1.755890 per ms 
+RESULT: 4 switches 9 tests min/max/avg/stdev = 1642.49/1912.79/1780.30/75.94 responses/s

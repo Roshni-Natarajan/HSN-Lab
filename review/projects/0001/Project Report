@@ -1,0 +1,177 @@
+Packet Loss,Pakcet Delay, UDT 
+Analyzation for UDP Traffic
+
+
+Abstract:
+The project dicusses the packet loss and packet delay for the UDP traffic. We analyzed that varying the queue sizes changes the packet loss and packet delay. We study the packet loss using iperf command and packet delay measurement is done using ping command. We are also evaluating UDT (UDP based data transfer) comparing the performance of UDP based data transfer with respect to TCP in a simple network. We are basically performing file transfer using UDT and FTP and comparing how they work for high speed data transfer under different bandwidth, delay and packet loss probabilities. We have used the Geni Portal and Gitbash to implement this experiment. 
+Introduction:
+A queue is a collection of objects waiting to be processed, one at a time. In the networking environment, packets are queued up into the memory buffers of network devices like routers and switches. Packets in a queue are usually arranged in first-in, first-out order, but various techniques may be used to prioritize packets or ensure that all packets are handled fairly, rather than allowing one source to grab more than its share of resources. The queuing of packets is mainly dependent on queue size. 
+
+On wide area networks (WANs), UDP has likely been used for real-time applications. 
+Traditionally, UDP, not TCP has been used as a transport layer protocol for real-time applications. 
+UDP is a much simpler protocol without connection setup delays, flow control, and retransmission, providing applications with a more raw interface to the network. F
+rom this simplicity, UDP meets the requirements of delay-sensitive real-time applications that can implement their own flow control and retransmission schemes. 
+Moreover, UDP is able to perform multicast communications.
+
+
+Evaluation:
+The experiment is divided into two parts, the first part evaluates the packet loss and packet delay based on the queue size while the second part compares the speed of file transfer with respect to UDT and FTP.
+•	PART I:
+
+The steps for performing the experiment as given as follows:
+1. Slice Creation in Geni Portal: Firstly, we have created a slice in the Geni Portal and added resources to our slice. The rspec file is added accordingly. We then Reserve the resources and begin analyzing the packet loss and delay in Gitbash console.
+2. Setup the destination to accept iperf UDP traffic using the command, iperf –s –u where ‘-u’ stands for UDP traffic. The Figure 1 depicts the same as follows:
+Fig1. Setting up the Destination ( http://i58.tinypic.com/mjmmoo.png)
+
+
+
+3. We then send the UDP traffic to the destination using the command, iperf –c destination –u –b 20mb –t 10
+Here, -b defines the bandwidth which is taken as 20 megabytes and –t defines the total time for which the transmission is active which is 10 seconds. After executing this command we simultaneously run the ping command. The ping command measures the packet delay while the iperf command measures the packet loss.
+The following figure shows the implementation of the above command:
+ 
+Fig2. Sending UDP traffic to destination (http://i60.tinypic.com/t98g2u.png)
+ 
+Fig3. Ping command execution (http://i62.tinypic.com/29nut0z.png)
+
+
+
+4. Now we study queuing for the UDP traffic. This is done by throtlling the router so that we can see some packet loss as it can’t handle the incoming traffic. There are four cases that we have implemented to show the variation in packet delay and packet loss w.r.t change in queue size.
+CASE 1: The outgoing rate of traffic (router) = 17mb
+               The speed of transmission  =  20mb
+               Queue size                 = 1000mb
+We observe that the delay goes on increasing linearly for every packet finally reaching a peak and then dropping suddenly after it has reached the peak. This is because there are more packets in the queue. Here, we also observe that there is 0% packet loss. 
+Hence, we can say that more number of packets can be transmitted as the queue size is large but there is more delay in transmitting these packets. The following fig.4, fig5 and fig.6 demonstrate the implementation of Case 1.
+ 
+Fig4. Execution with 17mb router speed, 20mb transmission speed and 1000mb queue length (http://i57.tinypic.com/2wg6cmf.png)
+ 
+Fig5. Packet loss 0% (http://i57.tinypic.com/17scc6.png)
+ 
+Fig6. Peak delay=1347 ms, Minimum Delay= 0.938 ms (http://i59.tinypic.com/n56mpl.png)
+
+CASE 2: The outgoing rate of traffic (router) = 17mb
+               The speed of transmission  =  20mb
+               Queue size                              = 10mb
+We observe that the delay goes on increasing linearly for every packet finally reaching a peak and then dropping suddenly after it has reached the peak. This is because there are more packets in the queue. Here, we also observe that there is a zero packet loss but the delay characteristic changes as the delay here is more than the previous case delay. 
+The following fig.7, fig.8 and fig.9 demonstrate the implementation of Case 2.
+ 
+Fig.7 Execution with 17mb router speed, 20mb transmission speed and 10mb queue size (http://i61.tinypic.com/b96fl3.png)
+ 
+Fig.8 Packet loss of 0% (http://i60.tinypic.com/24djajd.png)
+ 
+fig.9 The delay increases with peak delay of 1934 ms and minimum delay of 1.041 ms (http://i58.tinypic.com/2gsfnsh.png)
+
+
+CASE 3: The outgoing rate of traffic (router) = 17mb
+               The speed of transmission  =  20mb
+               Queue size                              = 2mb
+We observe that the delay now decreases compared to the previous cases. We observe that if we compare the delay for the three cases we see that the peak delay for this case is the least which is 985 ms. This is because the queue size is lesser and hence the number of packets sent would also decrease. Here, we also observe that there is a 9.1% packet loss. The following fig.10, fig.11 and fig.12 demonstrate the implementation of Case 3.
+
+ 
+Fig.10 Execution with 17mb router speed, 20mb transmission speed and 2mb queue size (http://i59.tinypic.com/343j1xc.png)
+ 
+Fig.11 Packet loss is 9.1 % (http://i59.tinypic.com/10xg70x.png)
+ 
+Fig.12 Peak delay is 985 ms, minimum delay is 1.21 ms (http://i58.tinypic.com/ku3bl.png)
+
+CASE 4: The outgoing rate of traffic (router) = 17mb
+               The speed of transmission  =  20mb
+               Queue size                              = 1mb
+We observe that the delay now decreases compared to the previous cases. We observe that if we compare the delay for the four cases we see that the peak delay for this case is the least which is 492 ms. This is because the queue size is lesser and hence the number of packets sent would also decrease. Here, we also observe that there is a 13% packet loss. The following fig.13, fig.14 and fig.15 demonstrate the implementation of Case 4.
+ 
+Fig.13 Execution with 17mb router speed, 20mb transmission speed and 1mb queue size (http://i60.tinypic.com/2lu26qd.png)
+ 
+Fig.14 Packet loss of 13% (http://i60.tinypic.com/24vv6f7.png)
+ 
+Fig.15 Peak delay is 492 ms, minimum delay is 1.34 ms (http://i62.tinypic.com/ivc02s.png)
+
+CASE 5: The outgoing rate of traffic (router) = 17mb
+               The speed of transmission  =  20mb
+               Queue size                 = 20kb
+We observe that the delay now decreases compared to the previous cases. We observe that if we compare the delay for the five cases we see that the peak delay for this case is the least which is 95.7 ms. This is because the queue size is lesser and hence the number of packets sent would also decrease. Here, we also observe that there is a 16% packet loss. The following fig.16, fig.17 and fig.18 demonstrate the implementation of Case 5.
+
+ 
+Fig.16 Execution with 17mb router speed, 20mb transmission speed and 20kb queue size (http://i58.tinypic.com/2yv6gyx.jpg)
+ 
+Fig.17 Packet loss of 16% (http://i61.tinypic.com/qso8kn.png)
+ 
+Fig.18 The peak delay is 95.7 ms, minimum delay is 1.23 ms (http://i59.tinypic.com/2vbtv00.png)
+
+
+
+
+Visual Representation of Results:
+ 
+Fig.19 Variation of Delay w.r.t Queue Size (http://i59.tinypic.com/28vrl7d.png)
+ 
+Fig.20 Variation in Packet loss w.r.t Queue size (http://i60.tinypic.com/317ilnd.png)
+
+PART II:
+
+Introduction:
+
+UDT-UDP based Data Transfer Protocol is designed for transfer of large data streams over high speed networks. It also supports basic commodity internet apart from high speed network data transfer applications.
+UDT is built from UDP by addition of congestion control and reliability control strategies. UDT uses a connection oriented transfer mechanism with periodic acknowledgements to confirm packet delivery.
+Algorithm used for maintaining congestion control strategy in UDT is based on Additive Increase and Multiplicative Decrease algorithm. Here packet transmission is controlled by rate control and window control where the sending rate is updated by AIMD algorithm.
+In the second part of the project we study the performance of UDT over TCP in a network shown below varying the bandwidth, delay and a certain probability of packet loss. We use three files for file transfer of sizes 10MB and 1 GB.
+The resource specification file for the topology is attached here and the network topology used for the experiment is shown below:
+fig 21 : network topology (http://s8.postimg.org/h0ueouclh/fig29.png)
+ 
+
+Evaluation:
+
+File transfer using UDT
+First log into both the pcs
+Now on pc1, we need to give the command to start the UDT file transfer server
+/local/udt4/app/sendfile
+Now on pc2, we need to start UDT file transfer client by giving the following command
+/local/udt4/app/recvfile pc1 9000 /local/datafiles/sm.10M /dev/null
+We have taken two files
+One file is a short file of 10M and another is a large file of 1GB
+Now the following is the transfer rate observed for two files using the udt in the following image:
+Fig 22: (http://i61.tinypic.com/4qfuo2.png)
+Fig 23: (http://s1.postimg.org/qck1mvznz/fig23.png )
+
+Stop the udp file transfer server in pc1
+Now let us check for ftp to compare the difference in speed for ftp and udp
+FTP file transfer
+Give ftp pc1 command in pc2 to start ftp client, and give the name and password
+Note: FTP server is already running in pc1
+Fig 24: (http://s27.postimg.org/sevovx4gj/fig24.png)
+
+ 
+Thus we can see a large difference in transmission speed between udt and ftp
+Next, log in to the delay node and giving the sudo ipfw pipe show to check the BW, delay and packet loss rate 
+Fig 25:(http://s23.postimg.org/mivx10s9n/fig25.png)
+ 
+In the above we can see that two pipes are used for network characteristics
+The two pipes above are 60111 and 60121
+Here the bandwidth is 1000mbs , delay is 1ms and the packet loss rate probability is zero
+Now let us configure the bandwidth , delay and packet loss rate in delay node
+BW=0 delay=0 plr=0.001
+
+Fig26: http://s28.postimg.org/6he8uhotp/fig26.png
+ 
+Now let us check the transmission speed for FTP for the following above cases
+Fig 27: (http://s8.postimg.org/kosjdvebp/fig27.png)
+ 
+Now the BW=100mbps, delay=0 and plr=0.001 (configured in delay node )
+Let us check the speed for udt and ftp for the above case
+ 
+For FTP :
+Fig 28: (http://s27.postimg.org/awvfcm5zn/fig28.png)
+
+The results are corelated using the following table:
+Table 1: (http://postimg.org/image/o1uj3qdob/)
+
+
+Conclusion: 
+The experiment is divided into two parts hence, the conclusion for each part is as follows:
+1. PART I shows that, queue size is directly proportional to the packet delay and inversely proportional to the packet loss. We studied five cases where we varied the queue size. Thus, we observed that when the queue size is very large we have 0% packet loss and a high delay. But as the queue size decreases the number of packets sent also decreases which increases the packet loss.
+2. PART II shows that for a large file transfer UDT is better than FTP while for a small file transfer FTP is better than UDT.
+
+References:
+1. http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.103.4461&rep=rep1&type=pdf
+2. http://udt.sourceforge.net/doc/udt-ccc-sc05-v10.pdf
+3.http://www.mcs.anl.gov/papers/P1614A.pdf
+
+

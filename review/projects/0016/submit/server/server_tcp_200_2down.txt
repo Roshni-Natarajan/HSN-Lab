@@ -1,0 +1,9 @@
+^Croot@server:/users/prateekv# iperf -s
+------------------------------------------------------------
+Server listening on TCP port 5001
+TCP window size: 85.3 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.20.11 port 5001 connected with 192.168.10.11 port 52396
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-14.5 sec   896 KBytes   508 Kbits/sec
+

@@ -1,0 +1,10 @@
+PING 10.0.210.1 (10.0.210.1) 56(84) bytes of data.
+64 bytes from 10.0.210.1: icmp_req=1 ttl=64 time=5.33 ms
+64 bytes from 10.0.210.1: icmp_req=2 ttl=64 time=5.96 ms
+64 bytes from 10.0.210.1: icmp_req=3 ttl=64 time=4.50 ms
+64 bytes from 10.0.210.1: icmp_req=4 ttl=64 time=4.50 ms
+64 bytes from 10.0.210.1: icmp_req=5 ttl=64 time=5.13 ms
+
+--- 10.0.210.1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 4006ms
+rtt min/avg/max/mdev = 4.501/5.089/5.969/0.556 ms

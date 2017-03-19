@@ -1,0 +1,25 @@
+myfun3=function(tname1_1,tname1_2,tname1_3,tname1_4,tname1_5,imgName){
+
+all <- read.table(tname1_1)
+str(all)
+cov <- read.table(tname1_2)
+str(cov)
+all <- rbind(all, cov)
+cov <- read.table(tname1_3)
+str(cov)
+all <- rbind(all, cov)
+cov <- read.table(tname1_4)
+str(cov)
+all <- rbind(all, cov)
+cov <- read.table(tname1_5)
+str(cov)
+all <- rbind(all, cov)
+cnames <- c("cov", "time", "tcp")
+names(all) <- cnames
+all$tcp <- as.factor(all$tcp)
+library(reshape2)
+library(ggplot2)
+q <- ggplot(all)
+q <- q + geom_line(aes(x=time, y=cov, colour=tcp, linetype=tcp))
+ggsave(imgName,plot=q)
+}

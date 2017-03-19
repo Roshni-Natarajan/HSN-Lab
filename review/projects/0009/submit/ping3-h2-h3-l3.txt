@@ -1,0 +1,25 @@
+PING 10.10.12.2 (10.10.12.2) 56(84) bytes of data.
+64 bytes from 10.10.12.2: icmp_req=1 ttl=63 time=57.2 ms
+64 bytes from 10.10.12.2: icmp_req=2 ttl=63 time=24.8 ms
+64 bytes from 10.10.12.2: icmp_req=3 ttl=63 time=1.26 ms
+64 bytes from 10.10.12.2: icmp_req=4 ttl=63 time=1.16 ms
+64 bytes from 10.10.12.2: icmp_req=5 ttl=63 time=1.14 ms
+64 bytes from 10.10.12.2: icmp_req=6 ttl=63 time=0.674 ms
+64 bytes from 10.10.12.2: icmp_req=7 ttl=63 time=1.25 ms
+64 bytes from 10.10.12.2: icmp_req=8 ttl=63 time=1.28 ms
+64 bytes from 10.10.12.2: icmp_req=9 ttl=63 time=1.11 ms
+64 bytes from 10.10.12.2: icmp_req=10 ttl=63 time=1.00 ms
+64 bytes from 10.10.12.2: icmp_req=11 ttl=63 time=0.713 ms
+64 bytes from 10.10.12.2: icmp_req=12 ttl=63 time=1.07 ms
+64 bytes from 10.10.12.2: icmp_req=13 ttl=63 time=1.27 ms
+64 bytes from 10.10.12.2: icmp_req=14 ttl=63 time=1.04 ms
+64 bytes from 10.10.12.2: icmp_req=15 ttl=63 time=1.42 ms
+64 bytes from 10.10.12.2: icmp_req=16 ttl=63 time=1.20 ms
+64 bytes from 10.10.12.2: icmp_req=17 ttl=63 time=1.00 ms
+64 bytes from 10.10.12.2: icmp_req=18 ttl=63 time=1.03 ms
+64 bytes from 10.10.12.2: icmp_req=19 ttl=63 time=0.788 ms
+64 bytes from 10.10.12.2: icmp_req=20 ttl=63 time=1.18 ms
+
+--- 10.10.12.2 ping statistics ---
+20 packets transmitted, 20 received, 0% packet loss, time 19024ms
+rtt min/avg/max/mdev = 0.674/5.088/57.264/13.040 ms

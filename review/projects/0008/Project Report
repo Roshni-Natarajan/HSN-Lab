@@ -1,0 +1,1075 @@
+Ans1
+.
+Experiment Design
+
+GOAL:
+The goal of our experiment is to contrast the performance of single aggregate system and multiple aggregate system and multiple aggregate system using stitching 
+by collecting latency and throughput data from our experiment.
+
+PARAMETERS:
+We will be varying the number of aggregates.
+Single Aggregate – We will be using a single aggregate for all 11 nodes of the topology.
+Multiple Aggregate – We will be using 10 nodes located in 10 different aggregates.
+
+In Multiple Aggregates, we will also evaluate its performance while using stitching with a topology of one server and two clients where one server and one
+client is in one aggregate and the other client is in the other aggregate and the two aggregates are connected using stitching.
+
+METRICS:
+1.	Bandwidth
+2.	Throughput
+
+DATA COLLECTION:
+We will be measuring the performance of the links in two ways- for different aggregate systems and in the stitching module. 
+
+DIFFERENT AGGREGATE SYSTEMS:
+1.	IN SINGLE AGGREGATE
+
+http://postimg.org/image/4ho4law0t/  [IMAGE LINK FOR TOPOLOGY]
+
+To measure the performance of links within an aggregate we will design an 11-node topology. Since in GENI, multiple Virtual Machines (VMs) can be allotted in
+the same physical machine/computer (PC), we have to test both the type of links: 
+
+i)	The links that connect VMs in the same PC. 
+ii)	The links that connect VMs on different PCs.
+
+Although three VMs are enough to test both the cases, the GENI resource allocation is such that it may provide the VMs on the same physical machine. 
+Hence we specify a topology with enough nodes (11 nodes) though we only need to measure the performance of 4 nodes as representatives.
+
+2.	IN MULTIPLE AGGREGATES
+To measure the performance of links from different aggregates, we select 10 aggregates and set up a topology by connecting one node in each of them 
+(i.e. 10 nodes in total).
+
+http://postimg.org/image/b8kgeoz1r/ [IMAGE FOR TOPOLOGY]
+ 
+IN MULTIPLE AGGREGATE SYSTEM USING STITCHING
+
+http://postimg.org/image/ogd6f5vh9/ [IMAGE FOR TOPOLOGY]
+
+We will set up a two node topology that connects two different aggregates using stitching and evaluate its performance. 
+In this topology, we will have one server and one client in one aggregate and one more client in another aggregate and connect the two aggregate using stitching.
+
+ANALYSIS PLAN:
+
+In all the modules of our experiment, we are comparing links. The command set that we are running for all of them are ‘ping’ and ‘iperf’ to analyze the latency 
+and throughput.
+
+Note: The reason that we are not analyzing the bandwidth is because it is already specified in the rspec. 
+
+After collecting the data through the above mentioned procedure, we aim to compare them in two parts.
+
+1.	Compare the performance of links in a single-aggregate system and multi-aggregate system.
+2.	Compare the performance between a stitched link and a local link.
+
+We plot the latency and throughput from the ping and iperf data respectively. To analyze and make the comparison we compare the graphs of latency vs time and 
+throughput vs. time and evaluate the performance of the links.
+These metrics give a good understanding of the performance of the links. We made sure that we do not measure any metrics that are not relevant to our experiment.
+
+
+
+
+ANSWER 2
+
+The way we implemented the experiment design is by aiming to run one trial every day and collecting data. However, there were days when we could not reserve the resources as the demand of the experiment in terms of resources is comparatively larger. Ultimately, we tried getting 5 trials to reach a conclusion and check whether it corresponds with source[1].
+We encountered multiple problems while reserving resources in the multi-aggregate system module.
+For reference, we always went back to our project guide, authors of source[1] and help@geni.net
+We used R-studio to communicate our results. We made it a point that we collect summary statistics of the right things and avoided as much chart junk as possible. 
+
+Results:
+1.	We have deduced that the latency in a single aggregate system is less that the latency observed in a multiple aggregate system
+2.	In the stitching experiment we observed that the left client, i.e. the client sharing its aggregate with the server shows a higher throughput value than
+the right client which is connected to the server using a stitched link and is on an aggregate different from the servers aggregate
+
+ANSWER 3
+
+Instructions for reproducing the results:
+
+From Raw Data:
+
+There are three parts to our experiment:
+
+1.	Experiment on a topology with all nodes in the same aggregate. 
+2.	Experiment on a topology with all nodes in different aggregates.
+3.	Experiment on a topology where two nodes (in separate aggregates) are connected using stitched links.
+
+Part 1: 
+
+In this experiment you are creating the topology of a single aggregate system using the following topology :
+
+http://postimg.org/image/4ho4law0t/  [IMAGE LINK FOR TOPOLOGY]
+
+This is the rspec required for this part of the experiment
+
+<rspec xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:tour="http://www.protogeni.net/resources/rspec/ext/apt-tour/1" xmlns:jacks="http://www.protogeni.net/resources/rspec/ext/jacks/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3    http://www.geni.net/resources/rspec/3/request.xsd" type="request">
+<node client_id="Server" component_manager_id="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm">
+    <sliver_type name="default-vm">
+    </sliver_type>
+    <services>
+    
+    
+    
+
+<execute command="/local/stitch-tutorial/install-script.sh" shell="sh"/>
+<install install_path="/local" url="http://www.gpolab.bbn.com/exp/StitchingTutorial/stitch-tutorial.tgz"/>
+</services> 
+    <interface client_id="Server:if0">
+<ip xmlns="http://www.geni.net/resources/rspec/3" address="10.10.1.2" type="ipv4" netmask="255.255.255.0"/>
+</interface>
+    <interface client_id="Server:if1">
+<ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.1.2" type="ipv4" netmask="255.255.255.0"/>
+</interface>
+    
+    <routable_control_ip xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+ </node>
+<node client_id="rtclient" exclusive="false" component_manager_id="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm">
+    <sliver_type name="default-vm"/>
+    <services>
+    
+    
+    
+
+<execute command="/local/stitch-tutorial/install-script.sh" shell="sh"/>
+<install install_path="/local" url="http://www.gpolab.bbn.com/exp/StitchingTutorial/stitch-tutorial.tgz"/>
+</services>
+    <interface client_id="Client2:if0">
+<ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.1.1" type="ipv4" netmask="255.255.255.0"/>
+</interface>
+    
+  </node>
+<node client_id="lftclient" exclusive="false" component_manager_id="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm">
+    <sliver_type name="default-vm"/>
+    <services>
+       
+       
+    
+
+<execute command="/local/stitch-tutorial/install-script.sh" shell="sh"/>
+<install install_path="/local" url="http://www.gpolab.bbn.com/exp/StitchingTutorial/stitch-tutorial.tgz"/>
+</services>
+    <interface client_id="Client1:if0">
+<ip xmlns="http://www.geni.net/resources/rspec/3" address="10.10.1.1" type="ipv4" netmask="255.255.255.0"/>
+</interface>
+    
+   </node>
+<link client_id="lan0">    
+      <interface_ref client_id="Server:if0"/>
+      <interface_ref client_id="Client1:if0"/>
+      <property source_id="Server:if0" dest_id="Client1:if0"/>
+      <property source_id="Client1:if0" dest_id="Server:if0"/>
+      <link_type name="lan"/>
+      
+   <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm"/>
+</link>
+<link client_id="lan1">    
+    <interface_ref client_id="Server:if1"/>
+    <interface_ref client_id="Client2:if0"/>
+    <property source_id="Server:if1" dest_id="Client2:if0"/>
+    <property source_id="Client2:if0" dest_id="Server:if1"/>
+    <link_type name="vlan"/>
+    
+    
+  <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm"/>
+<component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm"/>
+</link>
+</rspec>
+
+You will be representing the Visual results of this topology with the help of Rstudio, in Rstudio you will need the following scripts
+
+Script for Ping, i.e. Latency: This will generate a graph of Lateny v/s Time
+
+Script for Iperf i.e. Throughput: This will generate a graph of throughput v/s Time
+
+NOTE for Rscript : 
+1.The Rscripts are available on Bitbucket in the Rscript folder
+2.Wherever locations of the files are mentioned, use YOUR file locations 
+3. For ping – Enter the RTT min values from the generated ping text files, this will be entered manually in place of the values entered in the Rscript provided to you to generate a graph from your experiment results
+
+Part 2: Multiple Aggregate System
+
+In this experiment you are creating the topology of a multiple aggregate system using the following topology :
+
+http://postimg.org/image/b8kgeoz1r/ [IMAGE FOR TOPOLOGY]
+
+The rspec for this part of the experiment is as follows:
+
+<rspec xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:tour="http://www.protogeni.net/resources/rspec/ext/apt-tour/1" xmlns:jacks="http://www.protogeni.net/resources/rspec/ext/jacks/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3    http://www.geni.net/resources/rspec/3/request.xsd" type="request">
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-0" component_manager_id="urn:publicid:IDN+utah.geniracks.net+authority+cm" component_id="urn:publicid:IDN+utah.geniracks.net+node+pc3" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+52132" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc3.utah.geniracks.net" port="32058" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc3.utah.geniracks.net" port="32058" username="kav283"/>
+      <emulab:console server="pc3.utah.geniracks.net"/>
+    </services>
+    <interface client_id="interface-0" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+52135" component_id="urn:publicid:IDN+utah.geniracks.net+interface+pc3:eth0">
+      <ip address="10.0.192.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-2" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+52137" component_id="urn:publicid:IDN+utah.geniracks.net+interface+pc3:eth0">
+      <ip address="10.0.193.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-4" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+52139" component_id="urn:publicid:IDN+utah.geniracks.net+interface+pc3:eth0">
+      <ip address="10.0.194.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm3-13"/>
+    <host name="node-0.project-KV.ch-geni-net.utah.geniracks.net"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-1" component_manager_id="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm" component_id="urn:publicid:IDN+instageni.rnet.missouri.edu+node+pc2" sliver_id="urn:publicid:IDN+instageni.rnet.missouri.edu+sliver+22154" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc2.instageni.rnet.missouri.edu" port="36922" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc2.instageni.rnet.missouri.edu" port="36922" username="kav283"/>
+      <emulab:console server="pc2.instageni.rnet.missouri.edu"/>
+    </services>
+    <interface client_id="interface-1" sliver_id="urn:publicid:IDN+instageni.rnet.missouri.edu+sliver+22157" component_id="urn:publicid:IDN+instageni.rnet.missouri.edu+interface+pc2:eth0">
+      <ip address="10.0.192.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-6" sliver_id="urn:publicid:IDN+instageni.rnet.missouri.edu+sliver+22159" component_id="urn:publicid:IDN+instageni.rnet.missouri.edu+interface+pc2:eth0">
+      <ip address="10.0.195.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-8" sliver_id="urn:publicid:IDN+instageni.rnet.missouri.edu+sliver+22161" component_id="urn:publicid:IDN+instageni.rnet.missouri.edu+interface+pc2:eth0">
+      <ip address="10.0.196.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-10" sliver_id="urn:publicid:IDN+instageni.rnet.missouri.edu+sliver+22163" component_id="urn:publicid:IDN+instageni.rnet.missouri.edu+interface+pc2:eth0">
+      <ip address="10.0.197.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-12" sliver_id="urn:publicid:IDN+instageni.rnet.missouri.edu+sliver+22165" component_id="urn:publicid:IDN+instageni.rnet.missouri.edu+interface+pc2:eth0">
+      <ip address="10.0.198.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm2-3"/>
+    <host name="node-1.project-KV.ch-geni-net.instageni.rnet.missouri.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-2" component_manager_id="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm" component_id="urn:publicid:IDN+lan.sdn.uky.edu+node+pc1" sliver_id="urn:publicid:IDN+lan.sdn.uky.edu+sliver+29548" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc1.lan.sdn.uky.edu" port="37434" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc1.lan.sdn.uky.edu" port="37434" username="kav283"/>
+      <emulab:console server="pc1.lan.sdn.uky.edu"/>
+    </services>
+    <interface client_id="interface-3" sliver_id="urn:publicid:IDN+lan.sdn.uky.edu+sliver+29551" component_id="urn:publicid:IDN+lan.sdn.uky.edu+interface+pc1:eth0">
+      <ip address="10.0.193.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-9" sliver_id="urn:publicid:IDN+lan.sdn.uky.edu+sliver+29553" component_id="urn:publicid:IDN+lan.sdn.uky.edu+interface+pc1:eth0">
+      <ip address="10.0.196.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-14" sliver_id="urn:publicid:IDN+lan.sdn.uky.edu+sliver+29555" component_id="urn:publicid:IDN+lan.sdn.uky.edu+interface+pc1:eth0">
+      <ip address="10.0.199.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-16" sliver_id="urn:publicid:IDN+lan.sdn.uky.edu+sliver+29557" component_id="urn:publicid:IDN+lan.sdn.uky.edu+interface+pc1:eth0">
+      <ip address="10.0.200.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-18" sliver_id="urn:publicid:IDN+lan.sdn.uky.edu+sliver+29559" component_id="urn:publicid:IDN+lan.sdn.uky.edu+interface+pc1:eth0">
+      <ip address="10.0.201.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm1-49"/>
+    <host name="node-2.project-KV.ch-geni-net.lan.sdn.uky.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-3" component_manager_id="urn:publicid:IDN+geni.uchicago.edu+authority+cm" component_id="urn:publicid:IDN+geni.uchicago.edu+node+pc1" sliver_id="urn:publicid:IDN+geni.uchicago.edu+sliver+6145" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc1.geni.uchicago.edu" port="30522" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc1.geni.uchicago.edu" port="30522" username="kav283"/>
+      <emulab:console server="pc1.geni.uchicago.edu"/>
+    </services>
+    <interface client_id="interface-7" sliver_id="urn:publicid:IDN+geni.uchicago.edu+sliver+6148" component_id="urn:publicid:IDN+geni.uchicago.edu+interface+pc1:eth0">
+      <ip address="10.0.195.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-19" sliver_id="urn:publicid:IDN+geni.uchicago.edu+sliver+6150" component_id="urn:publicid:IDN+geni.uchicago.edu+interface+pc1:eth0">
+      <ip address="10.0.201.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-20" sliver_id="urn:publicid:IDN+geni.uchicago.edu+sliver+6152" component_id="urn:publicid:IDN+geni.uchicago.edu+interface+pc1:eth0">
+      <ip address="10.0.202.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-22" sliver_id="urn:publicid:IDN+geni.uchicago.edu+sliver+6154" component_id="urn:publicid:IDN+geni.uchicago.edu+interface+pc1:eth0">
+      <ip address="10.0.203.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm1-6"/>
+    <host name="node-3.project-KV.ch-geni-net.geni.uchicago.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-4" component_manager_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+node+pc1" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18279" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc1.instageni.rnoc.gatech.edu" port="33594" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc1.instageni.rnoc.gatech.edu" port="33594" username="kav283"/>
+      <emulab:console server="pc1.instageni.rnoc.gatech.edu"/>
+    </services>
+    <interface client_id="interface-5" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18283" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc1:eth0">
+      <ip address="10.0.194.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-11" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18285" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc1:eth0">
+      <ip address="10.0.197.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-32" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18297" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc1:eth0">
+      <ip address="10.0.208.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-36" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18299" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc1:eth0">
+      <ip address="10.0.210.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm1-4"/>
+    <host name="node-4.project-KV.ch-geni-net.instageni.rnoc.gatech.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-5" component_manager_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+node+pc2" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18280" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc2.instageni.rnoc.gatech.edu" port="33594" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc2.instageni.rnoc.gatech.edu" port="33594" username="kav283"/>
+      <emulab:console server="pc2.instageni.rnoc.gatech.edu"/>
+    </services>
+    <interface client_id="interface-17" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18287" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc2:eth0">
+      <ip address="10.0.200.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-21" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18289" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc2:eth0">
+      <ip address="10.0.202.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-24" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18291" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc2:eth0">
+      <ip address="10.0.204.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-26" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18293" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc2:eth0">
+      <ip address="10.0.205.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-28" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18295" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc2:eth0">
+      <ip address="10.0.206.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm2-9"/>
+    <host name="node-5.project-KV.ch-geni-net.instageni.rnoc.gatech.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-6" component_manager_id="urn:publicid:IDN+instageni.northwestern.edu+authority+cm" component_id="urn:publicid:IDN+instageni.northwestern.edu+node+pc1" sliver_id="urn:publicid:IDN+instageni.northwestern.edu+sliver+18847" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc1.instageni.northwestern.edu" port="31546" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc1.instageni.northwestern.edu" port="31546" username="kav283"/>
+      <emulab:console server="pc1.instageni.northwestern.edu"/>
+    </services>
+    <interface client_id="interface-13" sliver_id="urn:publicid:IDN+instageni.northwestern.edu+sliver+18850" component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth0">
+      <ip address="10.0.198.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-23" sliver_id="urn:publicid:IDN+instageni.northwestern.edu+sliver+18852" component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth0">
+      <ip address="10.0.203.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-29" sliver_id="urn:publicid:IDN+instageni.northwestern.edu+sliver+18854" component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth0">
+      <ip address="10.0.206.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-31" sliver_id="urn:publicid:IDN+instageni.northwestern.edu+sliver+18856" component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth0">
+      <ip address="10.0.207.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-33" sliver_id="urn:publicid:IDN+instageni.northwestern.edu+sliver+18858" component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth0">
+      <ip address="10.0.208.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-35" sliver_id="urn:publicid:IDN+instageni.northwestern.edu+sliver+18860" component_id="urn:publicid:IDN+instageni.northwestern.edu+interface+pc1:eth0">
+      <ip address="10.0.209.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm1-17"/>
+    <host name="node-6.project-KV.ch-geni-net.instageni.northwestern.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-7" component_manager_id="urn:publicid:IDN+instageni.clemson.edu+authority+cm" component_id="urn:publicid:IDN+instageni.clemson.edu+node+pc1" sliver_id="urn:publicid:IDN+instageni.clemson.edu+sliver+24818" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc1.instageni.clemson.edu" port="33594" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc1.instageni.clemson.edu" port="33594" username="kav283"/>
+      <emulab:console server="pc1.instageni.clemson.edu"/>
+    </services>
+    <interface client_id="interface-34" sliver_id="urn:publicid:IDN+instageni.clemson.edu+sliver+24821" component_id="urn:publicid:IDN+instageni.clemson.edu+interface+pc1:eth0">
+      <ip address="10.0.209.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-37" sliver_id="urn:publicid:IDN+instageni.clemson.edu+sliver+24823" component_id="urn:publicid:IDN+instageni.clemson.edu+interface+pc1:eth0">
+      <ip address="10.0.210.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-38" sliver_id="urn:publicid:IDN+instageni.clemson.edu+sliver+24825" component_id="urn:publicid:IDN+instageni.clemson.edu+interface+pc1:eth0">
+      <ip address="10.0.211.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm1-37"/>
+    <host name="node-7.project-KV.ch-geni-net.instageni.clemson.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-8" component_manager_id="urn:publicid:IDN+genirack.nyu.edu+authority+cm" component_id="urn:publicid:IDN+genirack.nyu.edu+node+pc2" sliver_id="urn:publicid:IDN+genirack.nyu.edu+sliver+15855" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc2.genirack.nyu.edu" port="40250" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc2.genirack.nyu.edu" port="40250" username="kav283"/>
+      <emulab:console server="pc2.genirack.nyu.edu"/>
+    </services>
+    <interface client_id="interface-27" sliver_id="urn:publicid:IDN+genirack.nyu.edu+sliver+15858" component_id="urn:publicid:IDN+genirack.nyu.edu+interface+pc2:eth0">
+      <ip address="10.0.205.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-30" sliver_id="urn:publicid:IDN+genirack.nyu.edu+sliver+15860" component_id="urn:publicid:IDN+genirack.nyu.edu+interface+pc2:eth0">
+      <ip address="10.0.207.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-39" sliver_id="urn:publicid:IDN+genirack.nyu.edu+sliver+15862" component_id="urn:publicid:IDN+genirack.nyu.edu+interface+pc2:eth0">
+      <ip address="10.0.211.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-40" sliver_id="urn:publicid:IDN+genirack.nyu.edu+sliver+15864" component_id="urn:publicid:IDN+genirack.nyu.edu+interface+pc2:eth0">
+      <ip address="10.0.212.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm2-23"/>
+    <host name="node-8.project-KV.ch-geni-net.genirack.nyu.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-9" component_manager_id="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+node+pc5" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+64598" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc5.instageni.gpolab.bbn.com" port="36410" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc5.instageni.gpolab.bbn.com" port="36410" username="kav283"/>
+      <emulab:console server="pc5.instageni.gpolab.bbn.com"/>
+    </services>
+    <interface client_id="interface-15" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+64601" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc5:eth0">
+      <ip address="10.0.199.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-25" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+64603" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc5:eth0">
+      <ip address="10.0.204.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-41" sliver_id="urn:publicid:IDN+instageni.gpolab.bbn.com+sliver+64605" component_id="urn:publicid:IDN+instageni.gpolab.bbn.com+interface+pc5:eth0">
+      <ip address="10.0.212.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm5-35"/>
+    <host name="node-9.project-KV.ch-geni-net.instageni.gpolab.bbn.com"/>
+  </node>
+  <link client_id="link-0" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+52134">
+    <interface_ref client_id="interface-0" component_id="urn:publicid:IDN+utah.geniracks.net+interface+pc3:eth0" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+52135"/>
+    <interface_ref client_id="interface-1"/>
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link client_id="link-1" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+52136">
+    <interface_ref client_id="interface-2" component_id="urn:publicid:IDN+utah.geniracks.net+interface+pc3:eth0" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+52137"/>
+    <interface_ref client_id="interface-3"/>
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <link_type name="egre-tunnel"/>
+    <component_manager name="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm"/>
+  </link>
+  <link client_id="link-2" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+52138">
+    <interface_ref client_id="interface-4" component_id="urn:publicid:IDN+utah.geniracks.net+interface+pc3:eth0" sliver_id="urn:publicid:IDN+utah.geniracks.net+sliver+52139"/>
+    <interface_ref client_id="interface-5"/>
+    <component_manager name="urn:publicid:IDN+utah.geniracks.net+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm"/>
+    <link_type name="egre-tunnel"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-3">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-6"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-7"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.uchicago.edu+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-4">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-8"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-9"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="gre-tunnel"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-5">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-10"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-11"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-6">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-12"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-13"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-7">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-14"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-15"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-8">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-16"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-17"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-9">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-18"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-19"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.uchicago.edu+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-10">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-20"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-21"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.uchicago.edu+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-11">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-22"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-23"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.uchicago.edu+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-12">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-24"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-25"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-13">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-26"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-27"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+genirack.nyu.edu+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-14">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-28"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-29"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-15">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-30"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-31"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+genirack.nyu.edu+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-16">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-32"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-33"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-17">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-34"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-35"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.clemson.edu+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.northwestern.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-18">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-36"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-37"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.clemson.edu+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-19">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-38"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-39"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.clemson.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+genirack.nyu.edu+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-20">
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-40"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-41"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+genirack.nyu.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.gpolab.bbn.com+authority+cm"/>
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+  </link>
+  <rs:site_info xmlns:rs="http://www.protogeni.net/resources/rspec/ext/site-info/1">
+    <rs:location country="US" latitude="40.768652" longitude="-111.84581"/>
+  </rs:site_info>
+</rspec>
+
+You will be representing the Visual results of this topology with the help of Rstudio, in Rstudio you will need the following scripts
+
+Script for Ping, i.e. Latency: This will generate a graph of Lateny v/s Time
+
+Script for Iperf i.e. Throughput: This will generate a graph of throughput v/s Time
+
+
+PART 3: 
+
+In this experiment we are creating the topology as shown below:
+
+http://postimg.org/image/ogd6f5vh9/ [IMAGE FOR TOPOLOGY]
+
+The rspec for the topology is as shown below. You can either copy-paste it in a text file and save it with any name (eg. MyName.rspec) or download it from the repository. 
+
+
+<rspec xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:tour="http://www.protogeni.net/resources/rspec/ext/apt-tour/1" xmlns:jacks="http://www.protogeni.net/resources/rspec/ext/jacks/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3    http://www.geni.net/resources/rspec/3/request.xsd" type="request">
+<node client_id="Server" component_manager_id="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm">
+    <sliver_type name="default-vm">
+    </sliver_type>
+    <services>
+    
+    
+    
+
+<execute command="/local/stitch-tutorial/install-script.sh" shell="sh"/>
+<install install_path="/local" url="http://www.gpolab.bbn.com/exp/StitchingTutorial/stitch-tutorial.tgz"/>
+</services> 
+    <interface client_id="Server:if0">
+<ip xmlns="http://www.geni.net/resources/rspec/3" address="10.10.1.2" type="ipv4" netmask="255.255.255.0"/>
+</interface>
+    <interface client_id="Server:if1">
+<ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.1.2" type="ipv4" netmask="255.255.255.0"/>
+</interface>
+    
+    <routable_control_ip xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+ </node>
+<node client_id="rtclient" exclusive="false" component_manager_id="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm">
+    <sliver_type name="default-vm"/>
+    <services>
+    
+    
+    
+
+<execute command="/local/stitch-tutorial/install-script.sh" shell="sh"/>
+<install install_path="/local" url="http://www.gpolab.bbn.com/exp/StitchingTutorial/stitch-tutorial.tgz"/>
+</services>
+    <interface client_id="Client2:if0">
+<ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.1.1" type="ipv4" netmask="255.255.255.0"/>
+</interface>
+    
+  </node>
+<node client_id="lftclient" exclusive="false" component_manager_id="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm">
+    <sliver_type name="default-vm"/>
+    <services>
+       
+       
+    
+
+<execute command="/local/stitch-tutorial/install-script.sh" shell="sh"/>
+<install install_path="/local" url="http://www.gpolab.bbn.com/exp/StitchingTutorial/stitch-tutorial.tgz"/>
+</services>
+    <interface client_id="Client1:if0">
+<ip xmlns="http://www.geni.net/resources/rspec/3" address="10.10.1.1" type="ipv4" netmask="255.255.255.0"/>
+</interface>
+    
+   </node>
+<link client_id="lan0">    
+      <interface_ref client_id="Server:if0"/>
+      <interface_ref client_id="Client1:if0"/>
+      <property source_id="Server:if0" dest_id="Client1:if0"/>
+      <property source_id="Client1:if0" dest_id="Server:if0"/>
+      <link_type name="lan"/>
+      
+   <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm"/>
+</link>
+<link client_id="lan1">    
+    <interface_ref client_id="Server:if1"/>
+    <interface_ref client_id="Client2:if0"/>
+    <property source_id="Server:if1" dest_id="Client2:if0"/>
+    <property source_id="Client2:if0" dest_id="Server:if1"/>
+    <link_type name="vlan"/>
+    
+    
+  <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm"/>
+<component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm"/>
+</link>
+</rspec>
+
+
+Create a slice for the experiment. Click on ‘Add Resources’. Under ‘Choose RSpec’ select ‘File’. Click on Choose File and select the Rspec you downloaded or saved. You can modify the topology to change the aggregates in case the default ones do not work. Click on the aggregate names. Select the new aggregate from the drop down box that appears. Once this is done, click on Reserve Resources. Once the resources are reserved, login to the right client and left client using two terminal terminals. 
+
+In the right client, run iperf using the following command:
+
+iperf –c 192.168.1.2 –reportstyle C –I 1 | tee OUTPUT.txt
+
+The iperf output will be saved in the file OUTPOUT .txt
+
+Now, to upload this to the repository you must clone the repository on the virtual machine. To do that use the following commands:
+
+sudo apt-get install git
+
+git clone URL_to_repository 
+
+Now, move the iperf file you created to the repository using the mv command.
+
+Upload the file to the repository using the following commands:
+
+git add Path_to_the_file
+
+git commit –m “Insert_commit_mesage”
+
+git pull –u origin master
+
+git push –u origin master
+
+Next, run ping using the following command:
+
+ping 192.168.1.2 > OUTPUT.txt
+
+An output file will be created. Push this file to the repository too.
+
+Repeat the procedures for the right client. Remember to use this IP address: 10.10.1.2
+
+
+
+
+From Existing Experimental setup:
+
+PART 1
+
+Once  have the Rscript and Rspec accessible,
+Log in to Geni Portal and Create a slice for the experiment. 
+
+Click on ‘Add Resources’.
+
+Under ‘Choose RSpec’ select ‘File’, this file is the Rspec shown above 
+
+Click on the Select tab and select the Rspec you downloaded or saved
+
+You can modify the topology to change the aggregates in case the default ones do not work. Click on the aggregate names. Select the new aggregate from the drop down box that appears.
+
+When you reserve the resources, you will notice that a few nodes belong to PCx and and few belong to PCy, you will generate ping and iperf traffic between nodes from Different PC’s and nodes from the Same PC.
+
+     
+      Login to the nodes using the following info and password "el6383s2015":
+node-0      
+guest@pc3.instageni.idre.ucla.edu -p 35898
+
+node-1
+guest@pc3.instageni.idre.ucla.edu -p 35899
+
+node-2
+guest@pc3.instageni.idre.ucla.edu -p 35901 
+
+node-3
+guest@pc4.instageni.idre.ucla.edu -p 35898 
+
+node-4
+guest@pc4.instageni.idre.ucla.edu -p 35899 
+
+node-5
+guest@pc4.instageni.idre.ucla.edu -p 35900 
+
+node-6
+guest@pc3.instageni.idre.ucla.edu -p 35902 
+
+node-7
+guest@pc2.instageni.idre.ucla.edu -p 35898 
+
+node-8
+guest@pc2.instageni.idre.ucla.edu -p 35899 
+
+node-9
+guest@pc3.instageni.idre.ucla.edu -p 35903 
+
+node-10
+guest@pc3.instageni.idre.ucla.edu -p 35900 
+
+
+Steps for SamePC:
+1.	Select 2 sets of two nodes, these 2 nodes must belong to the same PC
+2.	Execute Ping commands from one node to the other, these nodes belong to the same set
+ping –c  5 other_node_data_plane_ipaddress  > output.txt
+3.	Execute iperf commands for the same pair using the same IP address that you used to ping
+Command for client side iperf: iperf -c ip_address_of_server --reportstyle C  -i 1 | tee OUTPUT.txt
+Command for server side Iperf: iperf –s
+Note: Run iperf –s, keep it running and then execute iperf on the client
+
+Steps for DifferentPC:
+
+1.	Select 2 sets of two nodes, these 2 nodes must belong to different PC’s
+2.	Execute Ping commands from one node to the other, these nodes belong to the same set
+ping –c  5 other_node_data_plane_ipaddress  > output.txt
+3.	Execute iperf commands for the same pair using the same IP address that you used to ping
+Command for client side iperf: iperf -c ip_address_of_server --reportstyle C  -i 1 | tee OUTPUT.txt
+Command for server side Iperf: iperf –s
+Note: Run iperf –s, keep it running and then execute iperf on the client
+
+Now these files need to be pushed to bitbucket
+
+
+
+PART 2: 
+
+Once  have the Rscript and Rspec accessible,
+Log in to Geni Portal and Create a slice for the experiment. 
+
+Click on ‘Add Resources’.
+
+Under ‘Choose RSpec’ select ‘File’, this file is the Rspec shown above 
+
+Click on the Select tab and select the Rspec you downloaded or saved
+
+You can modify the topology to change the aggregates in case the default ones do not work. Click on the aggregate names. Select the new aggregate from the drop down box that appears.
+
+      You will reserve resources of 10 nodes, all belonging to 10 different aggregates
+      
+      Login to the nodes using the following info and password "el6383s2015":
+
+Node0:
+guest@pc2.instageni.cenic.net -p 32826
+
+Node1:
+guest@pc1.geni.it.cornell.edu -p 35642
+
+Node2:
+guest@pc2.instageni.clemson.edu -p 30778
+
+Node3:
+guest@pc5.instageni.rnoc.gatech.edu -p 32570
+
+Node4:
+guest@pc2.instageni.rnet.missouri.edu -p 34618
+
+Node5:
+guest@pc3.instageni.stanford.edu -p 35130
+
+Node6:
+guest@pc2.instageni.idre.ucla.edu -p 31546
+
+Node7:
+guest@pc1.geni.kettering.edu -p 30266
+
+Node8:
+guest@pc3.instageni.wisc.edu -p 36154
+
+Node 9:
+guest@pc1.instageni.nps.edu -p 32058
+
+
+IP Addresses for Ping
+
+1.	Ping from node 7 to node 5 :  10.1.24.1
+2.	Ping from node 7 to node 1 :  10.0.226.1
+3.	Ping from node 2 to node 0 :  10.0.192.1
+4.	Ping from node 2 to node 1 :  10.0.208.1
+5.	Ping from node 6 to node 2 :  10.1.0.1
+6.	Ping from node 6 to node 5 :  10.1.6.2
+7.	Ping from node 9 to node 5 :  10.1.30.1
+8.	Ping from node 9 to node 4 :  10.1.36.1
+9.	Ping from node 8 to node 4 :  10.1.42.1
+10.	Ping from node 8 to node 3 :  10.0.244.1
+
+NOTE : These nodes numbers and IP addresses will not be similar to the ones we have found the end results for because for a technical issue we had to re-reserve the Rspec and change a few aggregates; In doing so we were assigned new IP addresses, thus changing the subnets of all Ethernet port belonging to each node.
+The Rspec has been updated according to the nodes and ssh login information given above.
+
+
+
+
+Steps for SamePC:
+1.	Select 2 sets of two nodes
+2.	Execute Ping commands from one node to the other, these nodes belong to the same set
+ping –c  5 other_node_data_plane_ipaddress  > output.txt
+ 
+Now these files need to be pushed to bitbucket
+
+
+
+
+PART 3
+
+
+
+The rspec for the topology is as shown below. You can either copy-paste it in a text file and save it with any name (eg. MyName.rspec) or download it from the repository. 
+
+
+<rspec xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:tour="http://www.protogeni.net/resources/rspec/ext/apt-tour/1" xmlns:jacks="http://www.protogeni.net/resources/rspec/ext/jacks/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3    http://www.geni.net/resources/rspec/3/request.xsd" type="request">
+<node client_id="Server" component_manager_id="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm">
+    <sliver_type name="default-vm">
+    </sliver_type>
+    <services>
+    
+    
+    
+
+<execute command="/local/stitch-tutorial/install-script.sh" shell="sh"/>
+<install install_path="/local" url="http://www.gpolab.bbn.com/exp/StitchingTutorial/stitch-tutorial.tgz"/>
+</services> 
+    <interface client_id="Server:if0">
+<ip xmlns="http://www.geni.net/resources/rspec/3" address="10.10.1.2" type="ipv4" netmask="255.255.255.0"/>
+</interface>
+    <interface client_id="Server:if1">
+<ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.1.2" type="ipv4" netmask="255.255.255.0"/>
+</interface>
+    
+    <routable_control_ip xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+ </node>
+<node client_id="rtclient" exclusive="false" component_manager_id="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm">
+    <sliver_type name="default-vm"/>
+    <services>
+    
+    
+    
+
+<execute command="/local/stitch-tutorial/install-script.sh" shell="sh"/>
+<install install_path="/local" url="http://www.gpolab.bbn.com/exp/StitchingTutorial/stitch-tutorial.tgz"/>
+</services>
+    <interface client_id="Client2:if0">
+<ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.1.1" type="ipv4" netmask="255.255.255.0"/>
+</interface>
+    
+  </node>
+<node client_id="lftclient" exclusive="false" component_manager_id="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm">
+    <sliver_type name="default-vm"/>
+    <services>
+       
+       
+    
+
+<execute command="/local/stitch-tutorial/install-script.sh" shell="sh"/>
+<install install_path="/local" url="http://www.gpolab.bbn.com/exp/StitchingTutorial/stitch-tutorial.tgz"/>
+</services>
+    <interface client_id="Client1:if0">
+<ip xmlns="http://www.geni.net/resources/rspec/3" address="10.10.1.1" type="ipv4" netmask="255.255.255.0"/>
+</interface>
+    
+   </node>
+<link client_id="lan0">    
+      <interface_ref client_id="Server:if0"/>
+      <interface_ref client_id="Client1:if0"/>
+      <property source_id="Server:if0" dest_id="Client1:if0"/>
+      <property source_id="Client1:if0" dest_id="Server:if0"/>
+      <link_type name="lan"/>
+      
+   <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm"/>
+</link>
+<link client_id="lan1">    
+    <interface_ref client_id="Server:if1"/>
+    <interface_ref client_id="Client2:if0"/>
+    <property source_id="Server:if1" dest_id="Client2:if0"/>
+    <property source_id="Client2:if0" dest_id="Server:if1"/>
+    <link_type name="vlan"/>
+    
+    
+  <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+lan.sdn.uky.edu+authority+cm"/>
+<component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm"/>
+</link>
+</rspec>
+
+
+Create a slice for the experiment. Click on ‘Add Resources’. Under ‘Choose RSpec’ select ‘File’. Click on Choose File and select the Rspec you downloaded or saved. You can modify the topology to change the aggregates in case the default ones do not work. Click on the aggregate names. Select the new aggregate from the drop down box that appears. Once this is done, click on Reserve Resources. Once the resources are reserved, login to the right client and left client using two terminal terminals. 
+
+Login to the following nodes using the following info and password "el6383s2015":
+
+lftclient
+
+guest@pc5.lan.sdn.uky.edu -p 37946
+
+rtclient
+
+guest@pc1.instageni.rnet.missouri.edu -p 33082
+
+
+
+In the right client, run iperf using the following command:
+
+iperf –c 192.168.1.2 –reportstyle C –I 1 | tee OUTPUT.txt
+
+The iperf output will be saved in the file OUTPOUT .txt
+
+Now, to upload this to the repository you must clone the repository on the virtual machine. To do that use the following commands:
+
+sudo apt-get install git
+
+git clone URL_to_repository 
+
+Now, move the iperf file you created to the repository using the mv command.
+
+Upload the file to the repository using the following commands:
+
+git add Path_to_the_file
+
+git commit –m “Insert_commit_mesage”
+
+git pull –u origin master
+
+git push –u origin master
+
+Next, run ping using the following command:
+
+ping 192.168.1.2 > OUTPUT.txt
+
+An output file will be created. Push this file to the repository too.
+
+Repeat the procedures for the right client. Remember to use this IP address: 10.10.1.2
+
+
+
+Setting up the Experiment own your own:
+
+PART1: 
+
+To set up this experiment from scratch, you need to follow the following steps:
+1.	You will need to reserve 11 nodes, all as a part of one aggregate
+2.	Once the resources are selected, and are validated, you will be able to click on “Reserve resources” at the bottom of the page
+3.	Now you will be redirected to the Slice page, wait for the resources to get “Ready”
+4.	Select 2 sets of two nodes, from Same PC or Different PC depending on the experiment that you are performing
+5.	Now run the Ping and Iperf commands as stated above
+6.	Push the files onto bitbucket using the git commands
+
+
+
+PART 2
+
+To set up this experiment from scratch, you need to follow the following steps:
+3.	You will need to reserve 10 nodes, each belonging to a different aggregate
+4.	Once the resources are selected, and are validated, you will be able to click on “Reserve resources” at the bottom of the page
+5.	Now you will be redirected to the Slice page, wait for the resources to get “Ready”
+6.	Select 2 sets of two nodes
+7.	Now run the Ping and Iperf commands as stated above
+8.	Push the files onto bitbucket using the git commands
+
+
+
+PART 3
+
+We used the tutorial in the following GENI wiki page: http://groups.geni.net/geni/wiki/GENIExperimenter/Tutorials/StitchingTutorial
+
+Instead of using omnitools, we used the rspec provided on their page, made the modifications instructed by them and then reserved the resources using the Reserve Resources button on sliceJacks.
+
+Create a slice for the experiment. Click on ‘Add Resources’. Under ‘Choose RSpec’ select ‘File’. Click on Choose File and select the Rspec you downloaded or saved. Make the changes that were asked in the tutorial. Once this is done, click on Reserve Resources. Once the resources are reserved, login to the right client and left client using two terminal terminals. 
+
+In the right client, run iperf using the following command:
+
+iperf –c 192.168.1.2 –reportstyle C –I 1 | tee OUTPUT.txt
+
+The iperf output will be saved in the file OUTPOUT .txt
+
+Now, to upload this to the repository you must clone the repository on the virtual machine. To do that use the following commands:
+
+sudo apt-get install git
+
+git clone URL_to_repository 
+
+Now, move the iperf file you created to the repository using the mv command.
+
+Upload the file to the repository using the following commands:
+
+git add Path_to_the_file
+
+git commit –m “Insert_commit_mesage”
+
+git pull –u origin master
+
+git push –u origin master
+
+Next, run ping using the following command:
+
+ping 192.168.1.2 > OUTPUT.txt
+
+An output file will be created. Push this file to the repository too.
+
+Repeat the procedures for the right client. Remember to use this IP address: 10.10.1.2
+
+
+
+
+REFERENCES:
+
+ source[1] Fei, Zongming, Ping Yi, and Jianjun Yang. "{A Performance Perspective on Choosing between Single Aggregate and Multiple 
+ Aggregates for GENI Experime nts}." EAI Endorsed Transactions on Industrial Networks and Intelligent Systems 1.1 (2014): e5.
+APA
+
+source[2] https://bitbucket.org/ffund/el6383/src/master/lab2b/README.md
+
+
+
+
+
+
+
+

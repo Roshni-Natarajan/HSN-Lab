@@ -1,0 +1,3 @@
+server is ready at port: 9000
+new connection: 192.168.2.2:42342
+speed = 58.6073Mbits/sec

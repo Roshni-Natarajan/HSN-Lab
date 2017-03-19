@@ -1,0 +1,9 @@
+iperf -s
+------------------------------------------------------------
+Server listening on TCP port 5001
+TCP window size: 85.3 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.20.11 port 5001 connected with 192.168.10.11 port 52180
+[ ID] Interval       Transfer     Bandwidth
+[  4]  0.0-14.7 sec  1.38 MBytes   785 Kbits/sec
+

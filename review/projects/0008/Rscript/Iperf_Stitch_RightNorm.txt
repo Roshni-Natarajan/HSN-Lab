@@ -1,0 +1,32 @@
+dat <- read.csv("el6383-projectkv/stitching/trial1/iperfR_norm.txt")
+cnames <- c("time", "srcip", "srcport", "dstip", 
+            "dstport", "id", "interval", "data", 
+            "tput")
+names(dat) <- cnames
+all <- dat
+dat <- read.csv("el6383-projectkv/stitching/trial2/iperfr_norm.txt")
+names(dat) <- cnames
+all <- rbind(all, dat)
+dat <- read.csv("el6383-projectkv/stitching/trial3/iperfr_norm.txt")
+names(dat) <- cnames
+ 
+all <- rbind(all, dat)
+dat <- read.csv("el6383-projectkv/stitching/trial4/iperfr_norm.txt")
+names(dat) <- cnames
+all <- rbind(all, dat)
+dat <- read.csv("el6383-projectkv/stitching/trial5/iperfr_norm.txt")
+names(dat) <- cnames
+all <- rbind(all, dat)
+library(reshape2)
+all <- transform(all, interval = colsplit(interval,"-", names = c('begin', 'end')))
+all$interval.begin <- all$interval$begin
+all$interval.end <- all$interval$end
+all$interval <- NULL
+all$interval.begin
+all$interval.end
+totals  <- all[all$interval.begin<=1 & all$interval.end>=10,]
+details <- all[!(all$interval.begin<=1 & all$interval.end>=10),]
+library(ggplot2)
+q <- ggplot(details)
+q <- q + geom_line(aes(x=interval.begin, y=tput))
+q

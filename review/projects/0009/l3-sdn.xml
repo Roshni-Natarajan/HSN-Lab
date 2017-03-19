@@ -1,0 +1,60 @@
+<rspec xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:tour="http://www.protogeni.net/resources/rspec/ext/apt-tour/1" xmlns:jacks="http://www.protogeni.net/resources/rspec/ext/jacks/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3    http://www.geni.net/resources/rspec/3/request.xsd" type="request">
+<node client_id="OVS" exclusive="false" component_manager_id="urn:publicid:IDN+genirack.nyu.edu+authority+cm">
+    <sliver_type name="emulab-xen">
+      <disk_image name="urn:publicid:IDN+instageni.nysernet.org+image+emulab-ops:Ubuntu12-64-OVS"/>
+    </sliver_type>
+    <interface client_id="OVS:if0">
+      <ip address="10.10.10.1" netmask="255.255.255.0" type="ipv4"/>
+      <flack:interface_info xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" addressBound="true" bound="false"/>
+    </interface>
+    <interface client_id="OVS:if1">
+      <ip address="10.10.11.1" netmask="255.255.255.0" type="ipv4"/>
+      <flack:interface_info xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" x="500" y="300" unbound="true"/>
+  <services xmlns="http://www.geni.net/resources/rspec/3"/>
+<interface xmlns="http://www.geni.net/resources/rspec/3" client_id="OVS:if2">
+<ip xmlns="http://www.geni.net/resources/rspec/3" address="10.10.12.1" type="ipv4" netmask="255.255.255.0"/>
+</interface>
+</node>
+<node client_id="host1" exclusive="false" component_manager_id="urn:publicid:IDN+genirack.nyu.edu+authority+cm">
+    <sliver_type name="default-vm"/>
+    <interface client_id="host1:if0">
+      <ip address="10.10.10.2" netmask="255.255.255.0" type="ipv4"/>
+      <flack:interface_info xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" x="300" y="500" unbound="true"/>
+  <services xmlns="http://www.geni.net/resources/rspec/3"/>
+</node>
+<node client_id="host2" exclusive="false" component_manager_id="urn:publicid:IDN+genirack.nyu.edu+authority+cm">
+    <sliver_type name="default-vm"/>
+    <interface client_id="host2:if0">
+      <ip address="10.10.11.2" netmask="255.255.255.0" type="ipv4"/>
+      <flack:interface_info xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" addressBound="true" bound="false"/>
+    </interface>
+    <flack:node_info xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" x="700" y="500" unbound="true"/>
+  <services xmlns="http://www.geni.net/resources/rspec/3"/>
+</node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="host3" component_manager_id="urn:publicid:IDN+genirack.nyu.edu+authority+cm">
+<sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="default-vm"/>
+<services xmlns="http://www.geni.net/resources/rspec/3"/>
+<interface xmlns="http://www.geni.net/resources/rspec/3" client_id="host3:if0">
+<ip xmlns="http://www.geni.net/resources/rspec/3" address="10.10.12.2" type="ipv4" netmask="255.255.255.0"/>
+</interface>
+</node>
+<link client_id="lan0">
+    <interface_ref client_id="OVS:if0"/>
+    <interface_ref client_id="host1:if0"/>
+  <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+genirack.nyu.edu+authority+cm"/>
+</link>
+<link client_id="lan1">
+    <interface_ref client_id="OVS:if1"/>
+    <interface_ref client_id="host2:if0"/>
+  <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+genirack.nyu.edu+authority+cm"/>
+</link>
+<link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-0">
+<interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="host3:if0"/>
+<interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="OVS:if2"/>
+<component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+genirack.nyu.edu+authority+cm"/>
+</link>
+</rspec>

@@ -1,0 +1,16 @@
+------------------------------------------------------------
+Client connecting to 192.168.1.2, TCP port 5001
+TCP window size: 23.5 KByte (default)
+------------------------------------------------------------
+[  4] local 192.168.1.1 port 43213 connected with 192.168.1.2 port 5001
+[  5] local 192.168.1.1 port 43214 connected with 192.168.1.2 port 5001
+[  6] local 192.168.1.1 port 43215 connected with 192.168.1.2 port 5001
+[  3] local 192.168.1.1 port 43212 connected with 192.168.1.2 port 5001
+[  7] local 192.168.1.1 port 43216 connected with 192.168.1.2 port 5001
+[ ID] Interval       Transfer     Bandwidth
+[  6]  0.0-30.0 sec  12.0 MBytes  3.35 Mbits/sec
+[  3]  0.0-30.1 sec  16.1 MBytes  4.49 Mbits/sec
+[  7]  0.0-30.2 sec  13.6 MBytes  3.78 Mbits/sec
+[  4]  0.0-30.6 sec  12.8 MBytes  3.50 Mbits/sec
+[  5]  0.0-31.4 sec  20.1 MBytes  5.38 Mbits/sec
+[SUM]  0.0-31.4 sec  74.6 MBytes  19.9 Mbits/sec

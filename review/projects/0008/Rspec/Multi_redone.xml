@@ -1,0 +1,388 @@
+<rspec xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:tour="http://www.protogeni.net/resources/rspec/ext/apt-tour/1" xmlns:jacks="http://www.protogeni.net/resources/rspec/ext/jacks/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3    http://www.geni.net/resources/rspec/3/request.xsd" type="request">
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-0" component_manager_id="urn:publicid:IDN+instageni.cenic.net+authority+cm" component_id="urn:publicid:IDN+instageni.cenic.net+node+pc2" sliver_id="urn:publicid:IDN+instageni.cenic.net+sliver+3536" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc2.instageni.cenic.net" port="32826" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc2.instageni.cenic.net" port="32826" username="kav283"/>
+      <emulab:console server="pc2.instageni.cenic.net"/>
+    </services>
+    <interface client_id="interface-0" sliver_id="urn:publicid:IDN+instageni.cenic.net+sliver+3539" component_id="urn:publicid:IDN+instageni.cenic.net+interface+pc2:eth0">
+      <ip address="10.0.186.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-2" sliver_id="urn:publicid:IDN+instageni.cenic.net+sliver+3541" component_id="urn:publicid:IDN+instageni.cenic.net+interface+pc2:eth0">
+      <ip address="10.0.192.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-4" sliver_id="urn:publicid:IDN+instageni.cenic.net+sliver+3543" component_id="urn:publicid:IDN+instageni.cenic.net+interface+pc2:eth0">
+      <ip address="10.0.198.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm2-6"/>
+    <host name="node-0.Stitch.ch-geni-net.instageni.cenic.net"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-1" component_manager_id="urn:publicid:IDN+geni.it.cornell.edu+authority+cm" component_id="urn:publicid:IDN+geni.it.cornell.edu+node+pc1" sliver_id="urn:publicid:IDN+geni.it.cornell.edu+sliver+16733" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc1.geni.it.cornell.edu" port="35642" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc1.geni.it.cornell.edu" port="35642" username="kav283"/>
+      <emulab:console server="pc1.geni.it.cornell.edu"/>
+    </services>
+    <interface client_id="interface-1" sliver_id="urn:publicid:IDN+geni.it.cornell.edu+sliver+16736" component_id="urn:publicid:IDN+geni.it.cornell.edu+interface+pc1:eth0">
+      <ip address="10.0.186.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-6" sliver_id="urn:publicid:IDN+geni.it.cornell.edu+sliver+16738" component_id="urn:publicid:IDN+geni.it.cornell.edu+interface+pc1:eth0">
+      <ip address="10.0.208.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-8" sliver_id="urn:publicid:IDN+geni.it.cornell.edu+sliver+16740" component_id="urn:publicid:IDN+geni.it.cornell.edu+interface+pc1:eth0">
+      <ip address="10.0.214.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-10" sliver_id="urn:publicid:IDN+geni.it.cornell.edu+sliver+16742" component_id="urn:publicid:IDN+geni.it.cornell.edu+interface+pc1:eth0">
+      <ip address="10.0.220.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-12" sliver_id="urn:publicid:IDN+geni.it.cornell.edu+sliver+16744" component_id="urn:publicid:IDN+geni.it.cornell.edu+interface+pc1:eth0">
+      <ip address="10.0.226.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm1-1"/>
+    <host name="node-1.Stitch.ch-geni-net.geni.it.cornell.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-2" component_manager_id="urn:publicid:IDN+instageni.clemson.edu+authority+cm" component_id="urn:publicid:IDN+instageni.clemson.edu+node+pc2" sliver_id="urn:publicid:IDN+instageni.clemson.edu+sliver+25058" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc2.instageni.clemson.edu" port="30778" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc2.instageni.clemson.edu" port="30778" username="kav283"/>
+      <emulab:console server="pc2.instageni.clemson.edu"/>
+    </services>
+    <interface client_id="interface-3" sliver_id="urn:publicid:IDN+instageni.clemson.edu+sliver+25061" component_id="urn:publicid:IDN+instageni.clemson.edu+interface+pc2:eth0">
+      <ip address="10.0.192.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-7" sliver_id="urn:publicid:IDN+instageni.clemson.edu+sliver+25063" component_id="urn:publicid:IDN+instageni.clemson.edu+interface+pc2:eth0">
+      <ip address="10.0.208.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-15" sliver_id="urn:publicid:IDN+instageni.clemson.edu+sliver+25065" component_id="urn:publicid:IDN+instageni.clemson.edu+interface+pc2:eth0">
+      <ip address="10.0.232.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-20" sliver_id="urn:publicid:IDN+instageni.clemson.edu+sliver+25067" component_id="urn:publicid:IDN+instageni.clemson.edu+interface+pc2:eth0">
+      <ip address="10.0.250.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-22" sliver_id="urn:publicid:IDN+instageni.clemson.edu+sliver+25069" component_id="urn:publicid:IDN+instageni.clemson.edu+interface+pc2:eth0">
+      <ip address="10.1.0.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm2-9"/>
+    <host name="node-2.Stitch.ch-geni-net.instageni.clemson.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-3" component_manager_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+node+pc5" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18499" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc5.instageni.rnoc.gatech.edu" port="32570" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc5.instageni.rnoc.gatech.edu" port="32570" username="kav283"/>
+      <emulab:console server="pc5.instageni.rnoc.gatech.edu"/>
+    </services>
+    <interface client_id="interface-5" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18502" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc5:eth0">
+      <ip address="10.0.198.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-14" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18504" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc5:eth0">
+      <ip address="10.0.232.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-17" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18506" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc5:eth0">
+      <ip address="10.0.238.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-18" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18508" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc5:eth0">
+      <ip address="10.0.244.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm5-5"/>
+    <host name="node-3.Stitch.ch-geni-net.instageni.rnoc.gatech.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-4" component_manager_id="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm" component_id="urn:publicid:IDN+instageni.rnet.missouri.edu+node+pc2" sliver_id="urn:publicid:IDN+instageni.rnet.missouri.edu+sliver+22202" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc2.instageni.rnet.missouri.edu" port="34618" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc2.instageni.rnet.missouri.edu" port="34618" username="kav283"/>
+      <emulab:console server="pc2.instageni.rnet.missouri.edu"/>
+    </services>
+    <interface client_id="interface-16" sliver_id="urn:publicid:IDN+instageni.rnet.missouri.edu+sliver+22205" component_id="urn:publicid:IDN+instageni.rnet.missouri.edu+interface+pc2:eth0">
+      <ip address="10.0.238.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-21" sliver_id="urn:publicid:IDN+instageni.rnet.missouri.edu+sliver+22207" component_id="urn:publicid:IDN+instageni.rnet.missouri.edu+interface+pc2:eth0">
+      <ip address="10.0.250.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-26" sliver_id="urn:publicid:IDN+instageni.rnet.missouri.edu+sliver+22209" component_id="urn:publicid:IDN+instageni.rnet.missouri.edu+interface+pc2:eth0">
+      <ip address="10.1.12.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-29" sliver_id="urn:publicid:IDN+instageni.rnet.missouri.edu+sliver+22211" component_id="urn:publicid:IDN+instageni.rnet.missouri.edu+interface+pc2:eth0">
+      <ip address="10.1.18.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-34" sliver_id="urn:publicid:IDN+instageni.rnet.missouri.edu+sliver+22213" component_id="urn:publicid:IDN+instageni.rnet.missouri.edu+interface+pc2:eth0">
+      <ip address="10.1.36.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-36" sliver_id="urn:publicid:IDN+instageni.rnet.missouri.edu+sliver+22215" component_id="urn:publicid:IDN+instageni.rnet.missouri.edu+interface+pc2:eth0">
+      <ip address="10.1.42.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm2-3"/>
+    <host name="node-4.Stitch.ch-geni-net.instageni.rnet.missouri.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-5" component_manager_id="urn:publicid:IDN+instageni.stanford.edu+authority+cm" component_id="urn:publicid:IDN+instageni.stanford.edu+node+pc3" sliver_id="urn:publicid:IDN+instageni.stanford.edu+sliver+25429" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc3.instageni.stanford.edu" port="35130" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc3.instageni.stanford.edu" port="35130" username="kav283"/>
+      <emulab:console server="pc3.instageni.stanford.edu"/>
+    </services>
+    <interface client_id="interface-11" sliver_id="urn:publicid:IDN+instageni.stanford.edu+sliver+25432" component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth0">
+      <ip address="10.0.220.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-25" sliver_id="urn:publicid:IDN+instageni.stanford.edu+sliver+25434" component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth0">
+      <ip address="10.1.6.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-28" sliver_id="urn:publicid:IDN+instageni.stanford.edu+sliver+25436" component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth0">
+      <ip address="10.1.18.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-30" sliver_id="urn:publicid:IDN+instageni.stanford.edu+sliver+25438" component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth0">
+      <ip address="10.1.24.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-32" sliver_id="urn:publicid:IDN+instageni.stanford.edu+sliver+25440" component_id="urn:publicid:IDN+instageni.stanford.edu+interface+pc3:eth0">
+      <ip address="10.1.30.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm3-2"/>
+    <host name="node-5.Stitch.ch-geni-net.instageni.stanford.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-6" component_manager_id="urn:publicid:IDN+instageni.idre.ucla.edu+authority+cm" component_id="urn:publicid:IDN+instageni.idre.ucla.edu+node+pc2" sliver_id="urn:publicid:IDN+instageni.idre.ucla.edu+sliver+9258" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc2.instageni.idre.ucla.edu" port="31546" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc2.instageni.idre.ucla.edu" port="31546" username="kav283"/>
+      <emulab:console server="pc2.instageni.idre.ucla.edu"/>
+    </services>
+    <interface client_id="interface-9" sliver_id="urn:publicid:IDN+instageni.idre.ucla.edu+sliver+9261" component_id="urn:publicid:IDN+instageni.idre.ucla.edu+interface+pc2:eth0">
+      <ip address="10.0.214.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-23" sliver_id="urn:publicid:IDN+instageni.idre.ucla.edu+sliver+9263" component_id="urn:publicid:IDN+instageni.idre.ucla.edu+interface+pc2:eth0">
+      <ip address="10.1.0.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-24" sliver_id="urn:publicid:IDN+instageni.idre.ucla.edu+sliver+9265" component_id="urn:publicid:IDN+instageni.idre.ucla.edu+interface+pc2:eth0">
+      <ip address="10.1.6.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-27" sliver_id="urn:publicid:IDN+instageni.idre.ucla.edu+sliver+9267" component_id="urn:publicid:IDN+instageni.idre.ucla.edu+interface+pc2:eth0">
+      <ip address="10.1.12.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm2-9"/>
+    <host name="node-6.Stitch.ch-geni-net.instageni.idre.ucla.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-7" component_manager_id="urn:publicid:IDN+geni.kettering.edu+authority+cm" component_id="urn:publicid:IDN+geni.kettering.edu+node+pc1" sliver_id="urn:publicid:IDN+geni.kettering.edu+sliver+13209" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc1.geni.kettering.edu" port="30266" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc1.geni.kettering.edu" port="30266" username="kav283"/>
+      <emulab:console server="pc1.geni.kettering.edu"/>
+    </services>
+    <interface client_id="interface-13" sliver_id="urn:publicid:IDN+geni.kettering.edu+sliver+13212" component_id="urn:publicid:IDN+geni.kettering.edu+interface+pc1:eth0">
+      <ip address="10.0.226.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-31" sliver_id="urn:publicid:IDN+geni.kettering.edu+sliver+13214" component_id="urn:publicid:IDN+geni.kettering.edu+interface+pc1:eth0">
+      <ip address="10.1.24.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-40" sliver_id="urn:publicid:IDN+geni.kettering.edu+sliver+13216" component_id="urn:publicid:IDN+geni.kettering.edu+interface+pc1:eth0">
+      <ip address="10.1.54.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm1-1"/>
+    <host name="node-7.Stitch.ch-geni-net.geni.kettering.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-8" component_manager_id="urn:publicid:IDN+instageni.wisc.edu+authority+cm" component_id="urn:publicid:IDN+instageni.wisc.edu+node+pc3" sliver_id="urn:publicid:IDN+instageni.wisc.edu+sliver+21845" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc3.instageni.wisc.edu" port="36154" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc3.instageni.wisc.edu" port="36154" username="kav283"/>
+      <emulab:console server="pc3.instageni.wisc.edu"/>
+    </services>
+    <interface client_id="interface-19" sliver_id="urn:publicid:IDN+instageni.wisc.edu+sliver+21848" component_id="urn:publicid:IDN+instageni.wisc.edu+interface+pc3:eth0">
+      <ip address="10.0.244.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-37" sliver_id="urn:publicid:IDN+instageni.wisc.edu+sliver+21850" component_id="urn:publicid:IDN+instageni.wisc.edu+interface+pc3:eth0">
+      <ip address="10.1.42.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-38" sliver_id="urn:publicid:IDN+instageni.wisc.edu+sliver+21852" component_id="urn:publicid:IDN+instageni.wisc.edu+interface+pc3:eth0">
+      <ip address="10.1.48.1" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm3-27"/>
+    <host name="node-8.Stitch.ch-geni-net.instageni.wisc.edu"/>
+  </node>
+  <node xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" client_id="node-9" component_manager_id="urn:publicid:IDN+instageni.nps.edu+authority+cm" component_id="urn:publicid:IDN+instageni.nps.edu+node+pc1" sliver_id="urn:publicid:IDN+instageni.nps.edu+sliver+5185" exclusive="false">
+    <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+    <sliver_type name="default-vm"/>
+    <services>
+      <login authentication="ssh-keys" hostname="pc1.instageni.nps.edu" port="32058" username="ffund01"/>
+      <login authentication="ssh-keys" hostname="pc1.instageni.nps.edu" port="32058" username="kav283"/>
+      <emulab:console server="pc1.instageni.nps.edu"/>
+    </services>
+    <interface client_id="interface-33" sliver_id="urn:publicid:IDN+instageni.nps.edu+sliver+5188" component_id="urn:publicid:IDN+instageni.nps.edu+interface+pc1:eth0">
+      <ip address="10.1.30.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-35" sliver_id="urn:publicid:IDN+instageni.nps.edu+sliver+5190" component_id="urn:publicid:IDN+instageni.nps.edu+interface+pc1:eth0">
+      <ip address="10.1.36.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-39" sliver_id="urn:publicid:IDN+instageni.nps.edu+sliver+5192" component_id="urn:publicid:IDN+instageni.nps.edu+interface+pc1:eth0">
+      <ip address="10.1.48.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <interface client_id="interface-41" sliver_id="urn:publicid:IDN+instageni.nps.edu+sliver+5194" component_id="urn:publicid:IDN+instageni.nps.edu+interface+pc1:eth0">
+      <ip address="10.1.54.2" netmask="255.255.255.0" type="ipv4"/>
+    </interface>
+    <emulab:vnode name="pcvm1-2"/>
+    <host name="node-9.Stitch.ch-geni-net.instageni.nps.edu"/>
+  </node>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-0">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-0"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-1"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.cenic.net+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.it.cornell.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-1">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-2"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-3"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.cenic.net+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.clemson.edu+authority+cm"/>
+  </link>
+  <link client_id="link-2" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18501">
+    <link_type name="egre-tunnel"/>
+    <interface_ref client_id="interface-4"/>
+    <interface_ref client_id="interface-5" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc5:eth0" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18502"/>
+    <component_manager name="urn:publicid:IDN+instageni.cenic.net+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-3">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-6"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-7"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.it.cornell.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.clemson.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-4">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-8"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-9"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.it.cornell.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.idre.ucla.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-5">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-10"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-11"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.it.cornell.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-6">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-12"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-13"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.it.cornell.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.kettering.edu+authority+cm"/>
+  </link>
+  <link client_id="link-7" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18503">
+    <link_type name="egre-tunnel"/>
+    <interface_ref client_id="interface-14" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc5:eth0" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18504"/>
+    <interface_ref client_id="interface-15"/>
+    <component_manager name="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+instageni.clemson.edu+authority+cm"/>
+  </link>
+  <link client_id="link-8" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18505">
+    <link_type name="egre-tunnel"/>
+    <interface_ref client_id="interface-16"/>
+    <interface_ref client_id="interface-17" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc5:eth0" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18506"/>
+    <component_manager name="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm"/>
+  </link>
+  <link client_id="link-9" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18507">
+    <link_type name="egre-tunnel"/>
+    <interface_ref client_id="interface-18" component_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+interface+pc5:eth0" sliver_id="urn:publicid:IDN+instageni.rnoc.gatech.edu+sliver+18508"/>
+    <interface_ref client_id="interface-19"/>
+    <component_manager name="urn:publicid:IDN+instageni.rnoc.gatech.edu+authority+cm"/>
+    <component_manager name="urn:publicid:IDN+instageni.wisc.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-10">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-20"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-21"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.clemson.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-11">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-22"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-23"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.clemson.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.idre.ucla.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-12">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-24"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-25"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.idre.ucla.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-13">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-26"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-27"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.idre.ucla.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-14">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-28"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-29"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-15">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-30"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-31"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.kettering.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-16">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-32"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-33"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.stanford.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.nps.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-17">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-34"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-35"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.nps.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-18">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-36"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-37"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.rnet.missouri.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.wisc.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-19">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-38"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-39"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.wisc.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.nps.edu+authority+cm"/>
+  </link>
+  <link xmlns="http://www.geni.net/resources/rspec/3" client_id="link-20">
+    <link_type xmlns="http://www.geni.net/resources/rspec/3" name="egre-tunnel"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-40"/>
+    <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface-41"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.kettering.edu+authority+cm"/>
+    <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+instageni.nps.edu+authority+cm"/>
+  </link>
+  <rs:site_info xmlns:rs="http://www.protogeni.net/resources/rspec/ext/site-info/1">
+    <rs:location country="US" latitude="33.77846" longitude="-84.39888"/>
+  </rs:site_info>
+</rspec>

@@ -1,0 +1,22 @@
+PING 10.10.1.2 (10.10.1.2) 56(84) bytes of data.
+64 bytes from 10.10.1.2: icmp_req=1 ttl=64 time=1.03 ms
+64 bytes from 10.10.1.2: icmp_req=2 ttl=64 time=0.877 ms
+64 bytes from 10.10.1.2: icmp_req=3 ttl=64 time=0.956 ms
+64 bytes from 10.10.1.2: icmp_req=4 ttl=64 time=0.952 ms
+64 bytes from 10.10.1.2: icmp_req=5 ttl=64 time=0.896 ms
+64 bytes from 10.10.1.2: icmp_req=6 ttl=64 time=1.10 ms
+64 bytes from 10.10.1.2: icmp_req=7 ttl=64 time=0.770 ms
+64 bytes from 10.10.1.2: icmp_req=8 ttl=64 time=0.722 ms
+64 bytes from 10.10.1.2: icmp_req=9 ttl=64 time=0.935 ms
+64 bytes from 10.10.1.2: icmp_req=10 ttl=64 time=1.02 ms
+64 bytes from 10.10.1.2: icmp_req=11 ttl=64 time=0.927 ms
+64 bytes from 10.10.1.2: icmp_req=12 ttl=64 time=0.801 ms
+64 bytes from 10.10.1.2: icmp_req=13 ttl=64 time=0.642 ms
+64 bytes from 10.10.1.2: icmp_req=14 ttl=64 time=0.962 ms
+64 bytes from 10.10.1.2: icmp_req=15 ttl=64 time=0.763 ms
+64 bytes from 10.10.1.2: icmp_req=16 ttl=64 time=0.956 ms
+64 bytes from 10.10.1.2: icmp_req=17 ttl=64 time=0.854 ms
+
+--- 10.10.1.2 ping statistics ---
+17 packets transmitted, 17 received, 0% packet loss, time 16011ms
+rtt min/avg/max/mdev = 0.642/0.892/1.100/0.118 ms

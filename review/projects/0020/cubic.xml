@@ -1,0 +1,170 @@
+<rspec xmlns="http://www.geni.net/resources/rspec/3" xmlns:emulab="http://www.protogeni.net/resources/rspec/ext/emulab/1" xmlns:tour="http://www.protogeni.net/resources/rspec/ext/apt-tour/1" xmlns:jacks="http://www.protogeni.net/resources/rspec/ext/jacks/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.geni.net/resources/rspec/3    http://www.geni.net/resources/rspec/3/request.xsd" type="request">
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="switch1" component_manager_id="urn:publicid:IDN+geni.it.cornell.edu+authority+cm">
+        <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/Xen-VM.svg"/>
+        <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="emulab-xen">
+            <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU12-64-STD"/>
+        </sliver_type>
+        <services xmlns="http://www.geni.net/resources/rspec/3"/>
+        <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface1">
+            <ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.1.1" type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface11">
+            <ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.6.1" type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="switch2" component_manager_id="urn:publicid:IDN+geni.it.cornell.edu+authority+cm">
+        <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/Xen-VM.svg"/>
+        <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="emulab-xen">
+            <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU12-64-STD"/>
+        </sliver_type>
+        <services xmlns="http://www.geni.net/resources/rspec/3"/>
+        
+        <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface14">
+            <ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.7.2" type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface6">
+            <ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.3.2" type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="Bottleneck1" component_manager_id="urn:publicid:IDN+geni.it.cornell.edu+authority+cm">
+        <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/Xen-VM.svg"/>
+        <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="emulab-xen">
+            <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU12-64-STD"/>
+        </sliver_type>
+        <services xmlns="http://www.geni.net/resources/rspec/3"/>
+        <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface2">
+            <ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.1.2" type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        
+        
+        
+        <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface8">
+            <ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.4.2" type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface3">
+            <ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.2.1" type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="regulars" component_manager_id="urn:publicid:IDN+geni.it.cornell.edu+authority+cm">
+        <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/Xen-VM.svg"/>
+        <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="emulab-xen">
+            <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU12-64-STD"/>
+        </sliver_type>
+        <services xmlns="http://www.geni.net/resources/rspec/3"/>
+        
+        <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface7">
+            <ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.4.1" type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="regularc" component_manager_id="urn:publicid:IDN+geni.it.cornell.edu+authority+cm">
+        <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/Xen-VM.svg"/>
+        <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="emulab-xen">
+            <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU12-64-STD"/>
+        </sliver_type>
+        <services xmlns="http://www.geni.net/resources/rspec/3"/>
+        
+        <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface9">
+            <ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.5.1" type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="highc" component_manager_id="urn:publicid:IDN+geni.it.cornell.edu+authority+cm">
+        <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/Xen-VM.svg"/>
+        <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="emulab-xen">
+            <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU12-64-STD"/>
+        </sliver_type>
+        <services xmlns="http://www.geni.net/resources/rspec/3"/>
+        <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface13">
+            <ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.7.1" type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="highs" component_manager_id="urn:publicid:IDN+geni.it.cornell.edu+authority+cm">
+        <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/Xen-VM.svg"/>
+        <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="emulab-xen">
+            <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU12-64-STD"/>
+        </sliver_type>
+        <services xmlns="http://www.geni.net/resources/rspec/3"/>
+        <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface12">
+            <ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.6.2" type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="Bottleneck2" component_manager_id="urn:publicid:IDN+geni.it.cornell.edu+authority+cm">
+        <icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/Xen-VM.svg"/>
+        <sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="emulab-xen">
+            <disk_image xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU12-64-STD"/>
+        </sliver_type>
+        <services xmlns="http://www.geni.net/resources/rspec/3"/>
+        <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface5">
+            <ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.3.1" type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface10">
+            <ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.5.2" type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+        <interface xmlns="http://www.geni.net/resources/rspec/3" client_id="interface4">
+            <ip xmlns="http://www.geni.net/resources/rspec/3" address="192.168.2.2" type="ipv4" netmask="255.255.255.0"/>
+        </interface>
+    </node>
+<node xmlns="http://www.geni.net/resources/rspec/3" client_id="rstudio" component_manager_id="urn:publicid:IDN+geni.it.cornell.edu+authority+cm">
+<icon xmlns="http://www.protogeni.net/resources/rspec/ext/jacks/1" url="https://portal.geni.net/images/VM-noTxt-centered.svg"/>
+<routable_control_ip xmlns="http://www.protogeni.net/resources/rspec/ext/emulab/1"/>
+<sliver_type xmlns="http://www.geni.net/resources/rspec/3" name="default-vm"/>
+<services xmlns="http://www.geni.net/resources/rspec/3"/>
+</node>
+<link xmlns="http://www.geni.net/resources/rspec/3" client_id="lan0">
+        <link_type xmlns="http://www.geni.net/resources/rspec/3" name="lan"/>
+        <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface1"/>
+        <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface2"/>
+        <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.it.cornell.edu+authority+cm"/>
+        <property source_id="interface1" dest_id="interface2" capacity="100000"/>
+        <property source_id="interface2" dest_id="interface1" capacity="100000"/>
+    </link>
+<link xmlns="http://www.geni.net/resources/rspec/3" client_id="lan3">
+        <link_type xmlns="http://www.geni.net/resources/rspec/3" name="lan"/>
+        
+        
+        <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.it.cornell.edu+authority+cm"/>
+        <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface7"/>
+        <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface8"/>
+        <property source_id="interface7" dest_id="interface8" capacity="100000"/>
+        <property source_id="interface8" dest_id="interface7" capacity="100000"/>
+    </link>
+<link xmlns="http://www.geni.net/resources/rspec/3" client_id="lan6">
+        <link_type xmlns="http://www.geni.net/resources/rspec/3" name="lan"/>
+        <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface13"/>
+        <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface14"/>
+        <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.it.cornell.edu+authority+cm"/>
+        <property source_id="interface13" dest_id="interface14" capacity="100000"/>
+        <property source_id="interface14" dest_id="interface13" capacity="100000"/>
+    </link>
+<link xmlns="http://www.geni.net/resources/rspec/3" client_id="lan5">
+        <link_type xmlns="http://www.geni.net/resources/rspec/3" name="lan"/>
+        <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface11"/>
+        <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface12"/>
+        <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.it.cornell.edu+authority+cm"/>
+        <property source_id="interface11" dest_id="interface12" capacity="100000"/>
+        <property source_id="interface12" dest_id="interface11" capacity="100000"/>
+    </link>
+<link xmlns="http://www.geni.net/resources/rspec/3" client_id="lan2">
+        <link_type xmlns="http://www.geni.net/resources/rspec/3" name="lan"/>
+        <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface5"/>
+        <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface6"/>
+        <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.it.cornell.edu+authority+cm"/>
+        <property source_id="interface5" dest_id="interface6" capacity="100000"/>
+        <property source_id="interface6" dest_id="interface5" capacity="100000"/>
+    </link>
+<link xmlns="http://www.geni.net/resources/rspec/3" client_id="lan4">
+        <link_type xmlns="http://www.geni.net/resources/rspec/3" name="lan"/>
+        <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface9"/>
+        <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface10"/>
+        <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.it.cornell.edu+authority+cm"/>
+        <property source_id="interface9" dest_id="interface10" capacity="100000"/>
+        <property source_id="interface10" dest_id="interface9" capacity="100000"/>
+    </link>
+<link xmlns="http://www.geni.net/resources/rspec/3" client_id="lan1">
+        <link_type xmlns="http://www.geni.net/resources/rspec/3" name="lan"/>
+        <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface3"/>
+        <interface_ref xmlns="http://www.geni.net/resources/rspec/3" client_id="interface4"/>
+        <component_manager xmlns="http://www.geni.net/resources/rspec/3" name="urn:publicid:IDN+geni.it.cornell.edu+authority+cm"/>
+        <property source_id="interface3" dest_id="interface4" capacity="25000"/>
+        <property source_id="interface4" dest_id="interface3" capacity="25000"/>
+    </link>
+</rspec>

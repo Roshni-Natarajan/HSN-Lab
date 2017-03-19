@@ -1,0 +1,43 @@
+GOAL:
+To calibrate throughput for long lived background flows and latency for latency-sensitive Short query flows by using DCTCP over conventional TCP in Data center environment.
+
+MOTIVATION:
+Data centers is cluster of servers at a place which can provide services to different applications. The service request time and service required time varies dynamically. The volume of demand received and processed by data center is very large that conventional TCP will give away bandwidth for long lived bandwidth hungry connections. Consequently, short query flows suffer delay which is undesirable. When multiple servers send out data, the out queue of TOP of the Rack (TOR) Switch get flooded and drops/delays the packet. Background long lived flows are available which would have also consumed buffer space. To prevent this, DCTCP was introduced which uses Explicit Congestion Notification method along with modern commodity switch router which has ECN-enabled to avoid the congestion and regulate throughput. The ECN enabled switch is assigned with K (Marking threshold) which can keep the queue length limited. Consequently, long flows will get good throughput, short flows would not be delayed and also it could accommodate burst traffic. 
+
+Experiment setup:
+As implementing 100 servers in a rack like the one in conventional data center is out of scope of this project, we resemble data center with the following setup by using two clients which represents servers in rack, one router which resemble TOR switch and one server which supersedes for aggregator.
+Software setup:
+In order to use DCTCP, we have to upgrade the kernel to 3.18 from 3.13 in reserved virtual machine of two clients and one server. To fix the value of marking threshold which has significant impact on throughput, latency can be set by using RED Linux discipline in router. We set minq and maxq with a difference of one packet such that RED imitates ECN.
+To enable ecn on the switch we could use the following formula -(But we could not incorporate it in our topology)
+
+tc qdisc add dev eth0 root limit <bytes> min <bytes> max <bytes> \ avpkt <bytes> burst 
+<packets> probability <number> bandwidth <kbps> \ [ecn]
+
+where, k = marking threshold from 0 to 10
+avpkt = 1500 bytes
+min = k * avpkt
+max = (K+1) * avpkt
+burst = 8 * max
+p = 1
+
+
+Implementation:
+1.	Initially, server is made to listen to IPERF at its default port 5001.
+2.	We sweep the value of K at router from 2-10 with a gap of 2 and see the variation of throughput of long background flows by starting IPERF session from a client with N>4 flows.
+3.	We have to make the link between router and server which has capacity of 500Mbps as bottleneck by increasing the window size option in IPERF. We start the IPERF session from one client for indefinite period to resemble long flows.
+4.	As we are using IPERF, we will get throughput of the flows with variation of K. 
+5.	Simultaneously we started one more IPERF UDP listening mode in server.
+6. From the other client, we start a small UDP IPERF for 1 second or two to resemble short query flows. As we know that IPERF UDP test will yield network delay jitter. This will give us the latency of all short flows for different K (Marking threshold).
+
+
+Problems Faced:
+1) Initially we were following the paper to reproduce the DCTCP experiment. We started by trying to get the dctcp enabled kernel compiled in our VM. But even after successfully compiling the kernel we were unable to activate dctcp on it for a reason citing "failed to create ./debian"
+2) Then on browsing we figured out that dctcp is enabled on newer kernel versions 3.18 and above. We first started by installing 3.18.0 version kernel in our default vm machine but we got the errors like "no volume groups found" so updating kernel from this way on 12.04 Ubuntu also failed.
+3) We then started picking different machines with Ubuntu 14.04 to see which supports new kernel version. So, it took some time for us to figure out Ubuntu 14.04 with m1.large/m1.medium works for the new kernel.
+4) But even after figuring out node type and disk image that worked in the favor of experiment, at the final topology we could not include the node type(m1.medium) and disk image (Ubuntu 14.04) due to problem in selecting aggregate.
+5) We could not select a switch in our topology while selecting the node type and disk image we picked up. So, we picked a regular machine and installed "xorp" on it make it work as a router.
+6) Finally, we picked m1.medium machines and an ovs switch. The default vm machines came with Ubuntu 12.04 so we have to upgrade the version to 14.04 manually before starting our experiment (which is very tedious, since it takes more than an hour but we had no other choice). 
+7)After all this efforts we were able to enable DCTCP on m1.medium/m1.large machine by upgrading kernel to 13.18. But unfortunately we were unable to reserve resources due to reasons unknown with m1.medium and router.
+8)Hence at the end, we switched to a simple topology of one client and server(m1.medium)
+And performed the measurements to get the result.
+9) We are giving live setup for the users to reproduce our experiment.

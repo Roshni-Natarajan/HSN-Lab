@@ -1,0 +1,3 @@
+library(ggplot2)
+dat <- c(0.642, 0.509, 0.365, 0.335,  0.481)
+plot( dat, xlab="No. of Readings", ylab="Latency", sub="Ping output of Stitching Left Client to Server", type="o", col="blue")

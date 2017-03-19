@@ -1,0 +1,73 @@
+<rspec type="request" generated_by="Flack" generated="2012-05-02T18:47:33Z" xsi:schemaLocation="http://www.geni.net/resources/rspec/3 http://www.geni.net/resources/rspec/3/request.xsd  http://www.protogeni.net/resources/rspec/ext/delay/1 http://www.protogeni.net/resources/rspec/ext/delay/1/request-delay.xsd" xmlns:flack="http://www.protogeni.net/resources/rspec/ext/flack/1" xmlns:client="http://www.protogeni.net/resources/rspec/ext/client/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:delay="http://www.protogeni.net/resources/rspec/ext/delay/1" xmlns="http://www.geni.net/resources/rspec/3">
+  <node client_id="PC1" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="true">
+    <sliver_type name="raw-pc">
+      <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU11-64-STD"/>
+    </sliver_type>
+    <services>
+      <execute command="/local/UDTStartup.sh" shell="sh"/>
+      <install install_path="/local" url="http://sourceforge.net/projects/udt/files/udt/4.10/udt.sdk.4.10.tar.gz"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/UDTExampleExperiment/udt-startup.tar.gz"/>
+    </services>
+    <interface client_id="PC1:if0">
+      <ip address="192.168.2.1" netmask="255.255.255.0" type="ipv4"/>
+      <flack:interface_info addressUnset="false"/>
+    </interface>
+    <flack:node_info x="111" y="105" unbound="true"/>
+  </node>
+  <node client_id="PC2" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="true">
+    <sliver_type name="raw-pc">
+      <disk_image name="urn:publicid:IDN+emulab.net+image+emulab-ops//UBUNTU11-64-STD"/>
+    </sliver_type>
+    <services>
+      <execute command="/local/UDTStartup.sh" shell="sh"/>
+      <install install_path="/local" url="http://sourceforge.net/projects/udt/files/udt/4.10/udt.sdk.4.10.tar.gz"/>
+      <install install_path="/local" url="http://www.gpolab.bbn.com/experiment-support/UDTExampleExperiment/udt-startup.tar.gz"/>
+    </services>
+    <interface client_id="PC2:if0">
+      <ip address="192.168.2.2" netmask="255.255.255.0" type="ipv4"/>
+      <flack:interface_info addressUnset="false"/>
+    </interface>
+    <flack:node_info x="375" y="370" unbound="true"/>
+  </node>
+  <node client_id="delay" component_manager_id="urn:publicid:IDN+emulab.net+authority+cm" exclusive="true">
+    <sliver_type name="delay">
+      <delay:sliver_type_shaping>
+        <delay:pipe source="delay:if0" dest="delay:if1" capacity="1000000" packet_loss="0" latency="1"/>
+        <delay:pipe source="delay:if1" dest="delay:if0" capacity="1000000" packet_loss="0" latency="1"/>
+      </delay:sliver_type_shaping>
+    </sliver_type>
+    <interface client_id="delay:if0">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <interface client_id="delay:if1">
+      <flack:interface_info addressUnset="true"/>
+    </interface>
+    <flack:node_info x="236" y="221" unbound="true"/>
+  </node>
+  <link client_id="lan0">
+    <flack:link_info x="-1" y="-1" unboundVlantag="true" xmlns="http://www.protogeni.net/resources/rspec/ext/flack/1"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true" xmlns="http://www.protogeni.net/resources/rspec/ext/flack/1"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true" xmlns="http://www.protogeni.net/resources/rspec/ext/flack/1"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true" xmlns="http://www.protogeni.net/resources/rspec/ext/flack/1"/>
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <interface_ref client_id="delay:if0"/>
+    <interface_ref client_id="PC1:if0"/>
+    <property source_id="delay:if0" dest_id="PC1:if0"/>
+    <property source_id="PC1:if0" dest_id="delay:if0"/>
+    <link_type name="lan"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+  <link client_id="lan1">
+    <flack:link_info x="-1" y="-1" unboundVlantag="true" xmlns="http://www.protogeni.net/resources/rspec/ext/flack/1"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true" xmlns="http://www.protogeni.net/resources/rspec/ext/flack/1"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true" xmlns="http://www.protogeni.net/resources/rspec/ext/flack/1"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true" xmlns="http://www.protogeni.net/resources/rspec/ext/flack/1"/>
+    <component_manager name="urn:publicid:IDN+emulab.net+authority+cm"/>
+    <interface_ref client_id="delay:if1"/>
+    <interface_ref client_id="PC2:if0"/>
+    <property source_id="delay:if1" dest_id="PC2:if0"/>
+    <property source_id="PC2:if0" dest_id="delay:if1"/>
+    <link_type name="lan"/>
+    <flack:link_info x="-1" y="-1" unboundVlantag="true"/>
+  </link>
+</rspec>

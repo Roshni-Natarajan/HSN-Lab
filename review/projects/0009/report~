@@ -1,0 +1,134 @@
+1. We have designed an experiment which will draw the comparitative analysis of Layer 2 and Layer 3 routing techniques on an Openflow network with a POX 
+   controller and three hosts connected to a single switch which is configured to run as an OpenVswitch. We varied the parameters like L2 and L3 learning 
+   mode setup at different instances to measure the metrics such as RTT distribution time and Throughput. We collected the required data and have made an
+   analysis by plotting it on different graphs using Rstudio.
+2. We created two slices for this experiment one slice with a node which is configured to run as a publicly routable POX controller and another slice with
+   three hosts connected to a single switch where the switch is configured to run as an OpenVswitch. The switch after it is configured has to be pointed to
+   the controller by typing few commands. It is also setup in a secure mode which means all the packets that are destined to other host will be forwarded by
+   the controller and will be dropped once if the controller stops working. OpenVswitch can also be setup in a standalone mode where all the packets when 
+   controller does not work will be forwarded to its destination by the switch according to the routing table entries.
+3. All the results that have been generated were pushed into the bitbucket under submit folder. Here the controller is run in either of the two modes L2 or L3
+   learning modes which redirects the packets by Laye 2 routing and Layer 3 routing technique respectively. The difference between L2 and L3 learning mode in
+   case of POX controller has been clearly explained in the following link. 
+	https://openflow.stanford.edu/display/ONL/POX+Wiki#POXWiki-forwarding.l3_learning 
+   If we observe the results as shown in the following link which depicts the RTT distribution time for the packets to reach the destination in case while 
+   using L2 learning mode and L3 learning mode on the controller.
+	https://bitbucket.org/ak5011/el6383-project/src/5d71d97a1d425c0675acf5cd7bf1805d4f5d6db2/submit/L2vsL3link1.png?at=master
+   Here the first packet takes more RTT to reach the destination in case if we use L3 learning mode which is 47ms of RTT than using L2 learning mode which is
+   32ms of RTT. And also every first icmp packet takes more time to reach its destination than the following packets as it has to be directed through the 
+   controller which will take some time to forward the packet based on the rule. The following packets will pass through in less time as the controller already
+   know to which port the arrived packet has to be forwarded. This is also explained clearly in a plot which is generated and pushed into the bitbucket under 
+   submit folder. The following link shows the RTT distribution time of the ping data between host1 and host2.
+	https://bitbucket.org/ak5011/el6383-project/src/5d71d97a1d425c0675acf5cd7bf1805d4f5d6db2/submit/rtt_h1_h2.png?at=master        
+4. Instructions for reproducing your results in three ways:
+    a. Raw data -> Results:
+            For data analysis you should be able to give the ping output as readable input to rstudio. For that there is a .sh file called "process.sh" in the submit folder. 
+            you have to use this to make the ping output readable and that is done by "bash process.sh "filename.txt"". This generates another file with your filename. You 
+            should give this file as an input to rstudio to plot and the plot is a simple line plot.
+    b. Existing experiment setup -> Data: 
+            For the reviewers to login the username is "guest" and the password is "guest". For our topology we have five VM's 
+            i. Full name: controller (POX controller)
+            ii. Full name: ovs (Open flow Switch)
+            iii. Full name: host1 (host 1)
+            iv. FULL name: host2 (host 2)
+            v. FULL name: host3 (host 3)
+            These are the names of the nodes that we ahve given and the other details like Room N.o, work p.h, home p.h, and other are 10, 914-707-9825
+            000-000-0000, 111-111-1111 respectively. These are same for everynode
+    c. Set up experiment:
+        i.  Create two slices on GENI Portal.
+        ii. Reserve resources on both slices one with controller and other with three hosts connected to a switch.
+        iii. Configure the controller to run as a POX controller by running through following steps.
+           Step1: Login to the controller.
+           Step2: install git
+           Step3: git clone http://github.com/noxrepo/pox/
+           Step4: cd pox
+           Step5: ./pox.py openflow.of_01 --address=<controller-ip> --port=6633
+        iv. Configure the switch under the slice to work as an OpenVswitch
+           Step1: Download OVS
+                wget http://openvswitch.org/releases/openvswitch-1.9.3.tar.gz
+                tar xvfz openvswitch-1.9.3.tar.gz
+                cd openvswitch-1.9.3
+           Step2: Follow the instructions at INSTALL.Linux file. Install the prerequisets:
+                sudo apt-get update
+                sudo apt-get -y install pkg-config libssl-dev libc-dev   
+           Step3: Compile and install:
+                ./boot.sh
+                ./configure
+                make
+                sudo make install
+           Step4: Initialize the configuration database using ovsdb-tool
+                sudo mkdir -p /usr/local/etc/openvswitch
+                sudo ovsdb-tool create /usr/local/etc/openvswitch/conf.db vswitchd/vswitch.ovsschema
+           Step5: Startup
+                sudo ovsdb-server --remote=punix:/usr/local/var/run/openvswitch/db.sock \
+                     --remote=db:Open_vSwitch,manager_options \
+                     --private-key=db:SSL,private_key \
+                     --certificate=db:SSL,certificate \
+                     --bootstrap-ca-cert=db:SSL,ca_cert \
+                     --pidfile --detach
+               sudo ovs-vsctl --no-wait init
+               sudo ovs-vswitchd --pidfile --detach
+        v. Now point the switch to controller (to run it in L2 learning mode) by running the following commands on switch
+            Add bridge: sudo ovs-vsctl add-br OVSbr1
+            Remove IP’s of data plane: sudo ifconfig eth1 0
+            Add interface to the bridge: sudo ovs-vsctl add-port OVSbr1 eth1
+            View configuration: sudo ovs-ofctl show OVSbr1
+            View port configuration: sudo ovs-vsctl list-ports br0
+            Point switch to controller: sudo ovs-vsctl set-controller br0 tcp:<controller-ip>:6633
+            Fail mode: sudo ovs-vsctl set-fail-mode br0 secure
+            Verify OVS settings: sudo ovs-vsctl show
+        vi. Now login to any two hosts and try to ping eachother. Ping should not work.
+        vii.Run the controller in L2 learning mode by typing the following commands on controller.
+            To use controller: cd /tmp/pox
+                               ./pox.py --verbose forwarding.l2_learning
+            And wait till INFO……….Connected line indicates switch and controller are communicationg
+            To see flow table entries: sudo ovs-ofctl dump-flows br0
+            to see messages between switch and controller
+                                    sudo tcpdump -i eth0 tcp port 6633
+        viii. Now login to any two hosts and try to ping eachother. Ping should work. Save all outputs into text files. Also run commands for throughput
+              and save the output into text files for every two hosts and push them into bitbucket for further analysis with L3.
+        ix.  Delete resources and reserve again. Repeat steps upto (iv) and jump to step x.
+        x. Follow steps mentioned here: http://groups.geni.net/geni/wiki/HowTo/ConfigureOVSWithLayer3Routing
+           (Note: The link provided will give details to run the experiment with two hosts only but our experiment consists three hosts hence reserve resources
+                  with the provided rspec file for this experiment as (l3-sdn.xml) in bitbucket under submit folder.)
+            The commands used for our experiment are posted here: 
+            sudo ovs-vsctl add-br OVSbr1
+		    sudo ovs-vsctl add-br OVSbr2
+		    sudo ovs-vsctl add-br OVSbr3
+		    sudo ifconfig eth1 0
+		    sudo ifconfig eth2 0
+		    sudo ifconfig eth3 0
+		    sudo ovs-vsctl add-port OVSbr1 eth1
+		    sudo ovs-vsctl add-port OVSbr2 eth2
+		    sudo ovs-vsctl add-port OVSbr3 eth3
+
+		    sudo ifconfig OVSbr1 10.10.10.1/24 up
+		    sudo ifconfig OVSbr2 10.10.11.1/24 up
+		    sudo ifconfig OVSbr3 10.10.12.1/24 up
+		
+		    route -n
+    
+		    sudo ovs-ofctl add-flow OVSbr1 in_port=port_number_of_eth1,actions=LOCAL
+		    sudo ovs-ofctl add-flow OVSbr1 in_port=LOCAL,actions=output:port_number_of_eth1
+		    sudo ovs-ofctl add-flow OVSbr2 in_port=port_number_of_eth2,actions=LOCAL
+		    sudo ovs-ofctl add-flow OVSbr2 in_port=LOCAL,actions=output:port_number_of_eth2
+		    sudo ovs-ofctl add-flow OVSbr1 in_port=port_number_of_eth3,actions=LOCAL
+		    sudo ovs-ofctl add-flow OVSbr1 in_port=LOCAL,actions=output:port_number_of_eth3
+
+		    sudo ovs-vsctl set-controller OVSbr1 tcp:ip of controller:port no. 
+		    sudo ovs-vsctl set-controller OVSbr2 tcp:ip of controller:port no.
+		    sudo ovs-vsctl set-controller OVSbr3 tcp:ip of controller:port no.
+
+	    xi. Now login to any two hosts and try to ping each other. Ping should not work. 
+        xii. Run the controller in L3 learning mode by typing the following commands on controller.
+            To use controller: cd /tmp/pox
+                               ./pox.py --verbose forwarding.l3_learning
+            And wait till INFO……….Connected line indicates switch and controller are communicationg
+            To see flow table entries: sudo ovs-ofctl dump-flows OVSbr1
+                                       sudo ovs-ofctl dump-flows OVSbr2
+                                       sudo ovs-ofctl dump-flows OVSbr3
+            to see messages between switch and controller
+                                    sudo tcpdump -i eth0 tcp port 6633
+        xiii. Now login to any two hosts and try to ping eachother. Ping should work. Save all outputs into text files. Also run commands for throughput
+              and save the output into text files for every two hosts and push them into bitbucket for further analysis on Rstudio.
+        xiv. Delete Resources and login to Rstudio for performing statistical data analysis and generating plots.

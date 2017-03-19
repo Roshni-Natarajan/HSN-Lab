@@ -1,0 +1,1 @@
+sudo iperf -c 10.10.5.2 -u -b 100M -t 30 -i 1 --reportstyle C | tee 1_udp_output.txt
